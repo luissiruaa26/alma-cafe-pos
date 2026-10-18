@@ -1,0 +1,3040 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alma Café — Punto de Venta y Gestión de Pedidos</title>
+    <link rel="icon" href="/ico/5721739.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        espresso: {
+                            950: '#160e0a',
+                            900: '#231710',
+                            800: '#38251a',
+                            700: '#523626',
+                        },
+                        caramel: {
+                            50: '#fdf9f5',
+                            100: '#f9efe6',
+                            500: '#c87d46',
+                            600: '#b36630',
+                            700: '#934f22',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f6f2;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1ede6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbbba8;
+            border-radius: 9999px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8947d;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- PANTALLA COMPLETA DE INICIO DE SESIÓN (RF-01 / RNF-07) -->
+    <div id="pantallaLoginCompleta"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto bg-espresso-950">
+        <!-- Imagen de fondo representativa de la cafetería a pantalla completa -->
+        <div class="fixed inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1920&q=85"
+                alt="Alma Café Campus" onerror="this.style.display='none'"
+                class="w-full h-full object-cover object-center scale-105">
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-espresso-950/90 via-espresso-900/80 to-stone-950/90 backdrop-blur-[3px]">
+            </div>
+        </div>
+
+        <!-- Tarjeta de Login más alta y estilizada -->
+        <div
+            class="relative z-10 max-w-4xl w-full min-h-[560px] bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20 overflow-hidden grid grid-cols-1 md:grid-cols-12">
+
+            <!-- Columna Izquierda: Identidad Corporativa de Alma Café -->
+            <div
+                class="md:col-span-5 bg-espresso-900 text-white p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80"
+                    alt="Café de Especialidad" onerror="this.style.display='none'"
+                    class="absolute inset-0 w-full h-full object-cover opacity-25">
+                <div class="absolute inset-0 bg-gradient-to-t from-espresso-950 via-espresso-900/70 to-transparent">
+                </div>
+
+                <div class="relative z-10 space-y-5">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-caramel-600 p-0.5 shadow-xl flex items-center justify-center">
+                        <div
+                            class="w-full h-full bg-espresso-950 rounded-[14px] flex items-center justify-center text-amber-400">
+                            <i class="fa-solid fa-mug-hot text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400">Cafetería
+                            Universitaria</span>
+                        <h1 class="font-display font-extrabold text-3xl text-white mt-1">Alma Café</h1>
+                        <p class="text-xs sm:text-sm text-stone-300 mt-3 leading-relaxed">
+                            Plataforma integral para la toma de pedidos en barra, control de preparación en cocina y
+                            gestión de existencias de panadería y café de especialidad.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Información institucional de la sede -->
+                <div class="relative z-10 mt-10 pt-6 border-t border-white/15 space-y-3 text-xs text-stone-300">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-location-dot text-amber-400 w-4 text-center"></i>
+                        <span>Sede Central — Plazoleta Principal del Campus</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-regular fa-clock text-amber-400 w-4 text-center"></i>
+                        <span>Horario continuo: Lunes a Sábado • 6:30 a. m. – 8:30 p. m.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Formulario de Credenciales Limpio y Alto -->
+            <div class="md:col-span-7 p-8 sm:p-12 flex flex-col justify-center">
+                <div class="max-w-md mx-auto w-full space-y-7">
+                    <div>
+                        <span
+                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 mb-3">
+                            <i class="fa-solid fa-user-lock"></i> Acceso de Personal
+                        </span>
+                        <h2 class="font-display font-extrabold text-2xl text-slate-900">Apertura de Turno</h2>
+                        <p class="text-xs sm:text-sm text-stone-500 mt-1.5 leading-relaxed">
+                            Ingresa tus credenciales asignadas para habilitar las funciones correspondientes a tu rol
+                            operativo.
+                        </p>
+                    </div>
+
+                    <form onsubmit="procesarLoginPantallaCompleta(event)" class="space-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">Nombre de Usuario</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-user absolute left-4 top-3.5 text-stone-400 text-sm"></i>
+                                <input type="text" id="inputUserLoginScreen" required autocomplete="username"
+                                    placeholder="Ingresa tu usuario"
+                                    class="w-full pl-11 pr-4 py-3 text-sm border border-stone-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50 focus:bg-white transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">Contraseña</label>
+                            <div class="relative">
+                                <i class="fa-solid fa-lock absolute left-4 top-3.5 text-stone-400 text-sm"></i>
+                                <input type="password" id="inputPassLoginScreen" required
+                                    autocomplete="current-password" placeholder="••••••••"
+                                    class="w-full pl-11 pr-4 py-3 text-sm border border-stone-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50 focus:bg-white transition">
+                            </div>
+                        </div>
+
+                        <div id="mensajeErrorLoginScreen"
+                            class="hidden p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium">
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit"
+                                class="w-full py-3.5 px-5 rounded-2xl bg-espresso-900 hover:bg-amber-600 text-white font-display font-bold text-sm shadow-xl shadow-espresso-950/15 transition flex items-center justify-center gap-2.5">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <span>Iniciar Sesión</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="pt-4 border-t border-stone-200/80 text-center">
+                        <p class="text-[11px] text-stone-400">
+                            Si olvidaste tu contraseña o requieres actualización de permisos, solicita el cambio al
+                            Administrador del sistema.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENCABEZADO COMERCIAL DE LA CAFETERÍA -->
+    <header class="bg-espresso-950 text-white shadow-xl sticky top-0 z-40 border-b border-espresso-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+
+            <!-- Logo SVG Personalizado y Nombre Comercial -->
+            <div class="flex items-center gap-3.5">
+                <div
+                    class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 to-caramel-600 p-0.5 shadow-lg shadow-amber-600/20 flex items-center justify-center">
+                    <div class="w-full h-full bg-espresso-900 rounded-[14px] flex items-center justify-center">
+                        <svg class="w-7 h-7 text-amber-400" viewBox="0 0 64 64" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 26H46V38C46 46.8366 38.8366 54 30 54C21.1634 54 14 46.8366 14 38V26Z"
+                                stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M46 28H50C53.866 28 57 31.134 57 35C57 38.866 53.866 42 50 42H46"
+                                stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 58H50" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                            <path d="M24 18C24 14 27 12 27 8" stroke="#fbbf24" stroke-width="3.5"
+                                stroke-linecap="round" />
+                            <path d="M35 18C35 14 38 12 38 8" stroke="#fbbf24" stroke-width="3.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-display font-extrabold text-xl tracking-tight text-white">Alma Café</span>
+                        <span
+                            class="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                            Campus Central
+                        </span>
+                    </div>
+                    <p class="text-xs text-stone-400">Barra de Café Especial, Panadería Artesanal y Cocina</p>
+                </div>
+            </div>
+
+            <!-- Navegación Principal de la Cafetería -->
+            <nav
+                class="flex items-center gap-1.5 bg-espresso-900/90 p-1.5 rounded-2xl border border-espresso-800 overflow-x-auto max-w-full">
+                <button onclick="cambiarVista('caja')" id="nav-caja"
+                    class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap bg-amber-600 text-white shadow-sm">
+                    <i class="fa-solid fa-cash-register"></i>
+                    <span>Nuevo Pedido</span>
+                </button>
+                <button onclick="cambiarVista('ordenes')" id="nav-ordenes"
+                    class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition whitespace-nowrap text-stone-300 hover:text-white hover:bg-espresso-800">
+                    <i class="fa-solid fa-bell-concierge"></i>
+                    <span>Pedidos en Curso</span>
+                    <span id="badgePedidosActivos"
+                        class="px-1.5 py-0.5 text-[11px] rounded-full bg-amber-500/20 text-amber-300 font-bold">2</span>
+                </button>
+                <button onclick="cambiarVista('bodega')" id="nav-bodega"
+                    class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition whitespace-nowrap text-stone-300 hover:text-white hover:bg-espresso-800">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <span>Inventario</span>
+                </button>
+                <button onclick="cambiarVista('ventas')" id="nav-ventas"
+                    class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition whitespace-nowrap text-stone-300 hover:text-white hover:bg-espresso-800">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Cierre de Caja</span>
+                </button>
+                <button onclick="cambiarVista('usuarios')" id="nav-usuarios"
+                    class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition whitespace-nowrap text-stone-300 hover:text-white hover:bg-espresso-800">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>Personal</span>
+                </button>
+            </nav>
+
+            <!-- Perfil del Empleado Autenticado y Botón de Cerrar Turno -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 bg-espresso-900 border border-espresso-800 rounded-2xl px-3.5 py-2">
+                    <div id="headerUserAvatar"
+                        class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-xs font-bold text-white shadow-inner">
+                        AS
+                    </div>
+                    <div class="text-left">
+                        <p id="headerUserName" class="text-xs font-bold text-white leading-tight">Sin sesión</p>
+                        <div class="flex items-center gap-1.5 mt-0.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span id="headerUserRoleBadge" class="text-[11px] font-medium text-amber-300">-</span>
+                        </div>
+                    </div>
+                    <button onclick="abrirModalLogin()"
+                        class="ml-1 px-2.5 py-1.5 rounded-xl bg-espresso-800 hover:bg-espresso-700 text-xs font-semibold text-stone-200 transition flex items-center gap-1.5 border border-stone-700/60"
+                        title="Autenticar otro usuario con contraseña">
+                        <i class="fa-solid fa-key text-amber-400"></i>
+                        <span>Cambiar Turno</span>
+                    </button>
+                    <button onclick="cerrarSesionActual()"
+                        class="px-2.5 py-1.5 rounded-xl bg-rose-950/80 hover:bg-rose-800 text-xs font-semibold text-rose-200 transition flex items-center gap-1 border border-rose-800/60"
+                        title="Cerrar sesión actual">
+                        <i class="fa-solid fa-power-off"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 flex-1">
+
+        <!-- =================================================================== -->
+        <!-- VISTA 1: NUEVO PEDIDO (PUNTO DE VENTA Y CARRITO)                    -->
+        <!-- =================================================================== -->
+        <section id="vista-caja" class="space-y-6">
+
+            <!-- Banner Visual de Bienvenida y Estado Rápido -->
+            <div
+                class="relative rounded-3xl overflow-hidden bg-espresso-900 text-white shadow-lg border border-espresso-800">
+                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1400&q=80"
+                    alt="Interior de Alma Café" onerror="this.style.display='none'"
+                    class="absolute inset-0 w-full h-full object-cover opacity-25">
+                <div
+                    class="relative p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 bg-gradient-to-r from-espresso-950/95 via-espresso-900/85 to-transparent">
+                    <div class="max-w-xl">
+                        <span
+                            class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full mb-2">
+                            <i class="fa-solid fa-mug-saucer"></i> Servicio en Barra • Horario Universitario
+                        </span>
+                        <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-white">Terminal POS - Gestión
+                            de Pedidos
+                        </h1>
+                        <p class="text-xs sm:text-sm text-stone-300 mt-1">Selecciona los productos del menú para armar
+                            la orden del estudiante o docente. El inventario se verifica y descuenta automáticamente al
+                            confirmar.</p>
+                    </div>
+                    <!-- Indicadores Rápidos de la Jornada -->
+                    <div class="grid grid-cols-3 gap-3 shrink-0">
+                        <div
+                            class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-3 text-center">
+                            <span id="statEnFila"
+                                class="block font-display font-extrabold text-xl text-amber-400">1</span>
+                            <span class="text-[11px] text-stone-300">Por preparar</span>
+                        </div>
+                        <div
+                            class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-3 text-center">
+                            <span id="statEnCocina"
+                                class="block font-display font-extrabold text-xl text-sky-400">1</span>
+                            <span class="text-[11px] text-stone-300">En preparación</span>
+                        </div>
+                        <div
+                            class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-3 text-center">
+                            <span id="statCompletados"
+                                class="block font-display font-extrabold text-xl text-emerald-400">1</span>
+                            <span class="text-[11px] text-stone-300">Entregados hoy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layout de Punto de Venta: Izquierda Catálogo Visual | Derecha Comanda Actual -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+                <!-- CATÁLOGO DEL MENÚ (8 Columnas) -->
+                <div class="lg:col-span-8 space-y-4">
+                    <!-- Barra de Búsqueda y Categorías -->
+                    <div class="bg-white p-4 rounded-2xl border border-stone-200/80 shadow-sm space-y-3">
+                        <div class="flex flex-col sm:flex-row gap-3 justify-between">
+                            <div class="relative flex-1">
+                                <i
+                                    class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-stone-400 text-sm"></i>
+                                <input type="text" id="busquedaProducto" oninput="renderizarCatalogoPOS()"
+                                    placeholder="Buscar por nombre o código (ej. Latte, Empanada, CAF-001)..."
+                                    class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            </div>
+                            <label
+                                class="inline-flex items-center gap-2 text-xs font-medium text-stone-600 bg-stone-100 px-3.5 py-2 rounded-xl cursor-pointer select-none">
+                                <input type="checkbox" id="checkMostrarNoDisponibles" onchange="renderizarCatalogoPOS()"
+                                    checked class="rounded text-amber-600 focus:ring-amber-500">
+                                <span>Mostrar agotados / fuera de temporada</span>
+                            </label>
+                        </div>
+
+                        <!-- Píldoras de Categorías -->
+                        <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar"
+                            id="contenedorCategorias">
+                            <button onclick="filtrarPorCategoria('Todas')" data-cat="Todas"
+                                class="btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-espresso-900 text-white transition whitespace-nowrap">
+                                Todos los productos
+                            </button>
+                            <button onclick="filtrarPorCategoria('Cafés y Calientes')" data-cat="Cafés y Calientes"
+                                class="btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-700 hover:bg-stone-200 transition whitespace-nowrap">
+                                ☕ Cafés y Calientes
+                            </button>
+                            <button onclick="filtrarPorCategoria('Panadería Artesanal')" data-cat="Panadería Artesanal"
+                                class="btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-700 hover:bg-stone-200 transition whitespace-nowrap">
+                                🥐 Panadería Artesanal
+                            </button>
+                            <button onclick="filtrarPorCategoria('Almuerzos y Sanduches')"
+                                data-cat="Almuerzos y Sanduches"
+                                class="btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-700 hover:bg-stone-200 transition whitespace-nowrap">
+                                🥪 Almuerzos y Sanduches
+                            </button>
+                            <button onclick="filtrarPorCategoria('Bebidas Frías')" data-cat="Bebidas Frías"
+                                class="btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-700 hover:bg-stone-200 transition whitespace-nowrap">
+                                🥤 Bebidas Frías
+                            </button>
+                            <button onclick="filtrarPorCategoria('Repostería')" data-cat="Repostería"
+                                class="btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-700 hover:bg-stone-200 transition whitespace-nowrap">
+                                🍫 Repostería
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cuadrícula de Tarjetas de Productos -->
+                    <div id="gridProductosPOS" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                        <!-- Renderizado dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- COMANDA / TICKET DEL PEDIDO ACTUAL (4 Columnas) -->
+                <div class="lg:col-span-4 lg:sticky lg:top-24">
+                    <div
+                        class="bg-white rounded-3xl border border-stone-200/90 shadow-lg overflow-hidden flex flex-col">
+                        <!-- Cabecera del Ticket -->
+                        <div class="p-5 bg-espresso-900 text-white flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div
+                                    class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </div>
+                                <div>
+                                    <h2 class="font-display font-bold text-base">Orden de Venta</h2>
+                                    <p id="subtituloCajeroTicket" class="text-[11px] text-stone-400">Atendido por: -</p>
+                                </div>
+                            </div>
+                            <button onclick="limpiarCarrito()"
+                                class="text-xs text-stone-300 hover:text-rose-400 px-2.5 py-1 rounded-lg hover:bg-white/5 transition flex items-center gap-1"
+                                title="Limpiar todos los productos de la orden">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <span>Vaciar</span>
+                            </button>
+                        </div>
+
+                        <!-- Selector Rápido por Código -->
+                        <div class="p-3.5 bg-caramel-50 border-b border-stone-200">
+                            <p class="text-[11px] font-semibold text-stone-600 mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-barcode text-amber-700"></i>
+                                Ingreso rápido por código y cantidad:
+                            </p>
+                            <div class="flex gap-2">
+                                <select id="selectIngresoRapido"
+                                    class="flex-1 text-xs border border-stone-300 rounded-xl px-2.5 py-2 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                                    <!-- Cargado dinámicamente -->
+                                </select>
+                                <input type="number" id="inputCantidadRapida" value="1"
+                                    class="w-16 text-center text-xs font-semibold border border-stone-300 rounded-xl py-2 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                    title="Cantidad de unidades">
+                                <button onclick="agregarDesdeSelectorRapido()"
+                                    class="px-3 py-2 rounded-xl bg-espresso-900 hover:bg-amber-600 text-white text-xs font-semibold transition shrink-0">
+                                    Añadir
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Lista de Productos en la Orden -->
+                        <div id="contenedorItemsCarrito"
+                            class="p-4 divide-y divide-stone-100 max-h-[360px] overflow-y-auto">
+                            <!-- Dinámico -->
+                        </div>
+
+                        <!-- Resumen de Totales y Confirmación -->
+                        <div class="p-5 bg-stone-50 border-t border-stone-200 space-y-4">
+                            <div class="space-y-1.5 text-xs">
+                                <div class="flex justify-between text-stone-500">
+                                    <span>Líneas de producto:</span>
+                                    <span id="resumenLineasCarrito" class="font-semibold text-stone-700">0</span>
+                                </div>
+                                <div class="flex justify-between text-stone-500">
+                                    <span>Total de unidades:</span>
+                                    <span id="resumenUnidadesCarrito" class="font-semibold text-stone-700">0</span>
+                                </div>
+                                <div class="flex justify-between items-baseline pt-2 border-t border-stone-200/80">
+                                    <span class="font-display font-bold text-sm text-slate-900">Total a Pagar</span>
+                                    <span id="carritoTotalLabel"
+                                        class="font-display font-extrabold text-2xl text-amber-700">$0</span>
+                                </div>
+                            </div>
+
+                            <button onclick="confirmarNuevoPedido()"
+                                class="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] text-white font-display font-bold text-sm shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 transition">
+                                <i class="fa-solid fa-circle-check text-base"></i>
+                                <span>Confirmar y Registrar Pedido</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- VISTA 2: PEDIDOS EN CURSO Y MONITOR DE COCINA                       -->
+        <!-- =================================================================== -->
+        <section id="vista-ordenes" class="hidden space-y-6">
+
+            <!-- Barra de Filtros y Consulta de Pedidos -->
+            <div class="bg-white p-5 rounded-3xl border border-stone-200 shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="font-display font-extrabold text-xl text-slate-900">Control de Órdenes y Preparación
+                        </h2>
+                        <p class="text-xs text-stone-500 mt-0.5">Consulta pedidos por número, fecha o estado actual,
+                            actualiza el avance en cocina o gestiona cancelaciones.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="limpiarFiltrosPedidos()"
+                            class="px-3 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition">
+                            <i class="fa-solid fa-filter-circle-xmark mr-1"></i>Ver todos
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-stone-100">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-stone-500 uppercase mb-1">Número de
+                            Pedido</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-hashtag absolute left-3 top-2.5 text-stone-400 text-xs"></i>
+                            <input type="text" id="filtroNumeroPedido" oninput="renderizarListaPedidos()"
+                                placeholder="Ej. PED-1001"
+                                class="w-full pl-8 pr-3 py-2 text-xs border border-stone-300 rounded-xl bg-stone-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-stone-500 uppercase mb-1">Fecha de
+                            Registro</label>
+                        <input type="date" id="filtroFechaPedido" onchange="renderizarListaPedidos()"
+                            class="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl bg-stone-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-stone-500 uppercase mb-1">Estado del
+                            Pedido</label>
+                        <select id="filtroEstadoPedido" onchange="renderizarListaPedidos()"
+                            class="w-full px-3 py-2 text-xs border border-stone-300 rounded-xl bg-stone-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="Todos">Todos los estados</option>
+                            <option value="Registrado">Registrado (En fila)</option>
+                            <option value="En preparación">En preparación (Cocina)</option>
+                            <option value="Listo">Listo para entregar</option>
+                            <option value="Entregado">Entregado</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas de Pedidos -->
+            <div id="contenedorListaPedidos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Renderizado dinámicamente -->
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- VISTA 3: EXISTENCIAS Y MENÚ (PRODUCTOS E INVENTARIO)                -->
+        <!-- =================================================================== -->
+        <section id="vista-bodega" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl border border-stone-200 shadow-sm p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-100 pb-4">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase text-amber-700">Catálogo y Almacén</span>
+                        <h2 class="font-display font-extrabold text-xl text-slate-900">Control de Productos e Inventario
+                        </h2>
+                        <p class="text-xs text-stone-500 mt-0.5">Gestión del menú activo, existencias disponibles y
+                            registro de entradas de mercancía.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <button onclick="abrirModalNuevoProducto()"
+                            class="px-4 py-2.5 rounded-xl bg-espresso-900 hover:bg-espresso-800 text-white text-xs font-semibold flex items-center gap-2 shadow-sm transition">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Nuevo Producto</span>
+                        </button>
+                        <button onclick="abrirModalEntradaInventario()"
+                            class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold flex items-center gap-2 shadow-sm transition">
+                            <i class="fa-solid fa-boxes-packing"></i>
+                            <span>Registrar Entrada de Mercancía</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto mt-4">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-stone-50 text-[11px] font-semibold uppercase text-stone-500 border-b border-stone-200">
+                                <th class="py-3 px-4">ID / Código</th>
+                                <th class="py-3 px-4">Producto</th>
+                                <th class="py-3 px-4">Categoría</th>
+                                <th class="py-3 px-4 text-right">Precio Unitario</th>
+                                <th class="py-3 px-4 text-center">Existencia</th>
+                                <th class="py-3 px-4 text-center">Alerta Stock</th>
+                                <th class="py-3 px-4 text-center">Estado</th>
+                                <th class="py-3 px-4 text-center">Acciones (Admin)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCatalogoCompleta" class="divide-y divide-stone-100 text-xs sm:text-sm">
+                            <!-- Dinámico -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Kárdex / Bitácora de Movimientos de Inventario -->
+            <div class="bg-white rounded-3xl border border-stone-200 shadow-sm p-6">
+                <h3 class="font-display font-bold text-base text-slate-900 mb-1">Bitácora de Movimientos de Inventario
+                </h3>
+                <p class="text-xs text-stone-500 mb-4">Registro histórico de descuentos por pedidos confirmados,
+                    reintegros por cancelación y entradas de almacén.</p>
+                <div class="overflow-x-auto max-h-80">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-stone-50 font-semibold uppercase text-stone-500 border-b border-stone-200">
+                                <th class="py-2.5 px-3">N° Mov.</th>
+                                <th class="py-2.5 px-3">Fecha y Hora</th>
+                                <th class="py-2.5 px-3">Producto</th>
+                                <th class="py-2.5 px-3 text-center">Operación</th>
+                                <th class="py-2.5 px-3 text-center">Variación</th>
+                                <th class="py-2.5 px-3">Concepto / Orden Asociada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaMovimientosInventario" class="divide-y divide-stone-100">
+                            <!-- Dinámico -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- VISTA 4: CIERRE DE CAJA Y REPORTE DE VENTAS                         -->
+        <!-- =================================================================== -->
+        <section id="vista-ventas" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl border border-stone-200 shadow-sm p-6">
+                <div class="border-b border-stone-100 pb-4">
+                    <h2 class="font-display font-extrabold text-xl text-slate-900">Consolidado de Ventas e Historial de
+                        Caja</h2>
+                    <p class="text-xs text-stone-500 mt-0.5">Los ingresos efectivos contabilizan únicamente los pedidos
+                        entregados satisfactoriamente.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                    <div class="p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200">
+                        <span class="text-xs font-semibold text-emerald-800 uppercase">Ingresos por Pedidos
+                            Entregados</span>
+                        <p id="reporteTotalVentas" class="text-3xl font-display font-extrabold text-emerald-950 mt-1">$0
+                        </p>
+                        <p id="reporteConteoEntregados" class="text-xs text-emerald-700 mt-1">0 órdenes entregadas</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-amber-50/80 border border-amber-200">
+                        <span class="text-xs font-semibold text-amber-800 uppercase">Productos Vendidos y
+                            Entregados</span>
+                        <p id="reporteUnidadesVendidas"
+                            class="text-3xl font-display font-extrabold text-amber-950 mt-1">0</p>
+                        <p class="text-xs text-amber-700 mt-1">Unidades despachadas en barra</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-rose-50/80 border border-rose-200">
+                        <span class="text-xs font-semibold text-rose-800 uppercase">Órdenes Canceladas (No
+                            Contabilizadas)</span>
+                        <p id="reporteTotalCancelados" class="text-3xl font-display font-extrabold text-rose-950 mt-1">
+                            $0</p>
+                        <p id="reporteConteoCancelados" class="text-xs text-rose-700 mt-1">0 órdenes anuladas con
+                            devolución de stock</p>
+                    </div>
+                </div>
+
+                <h3 class="font-display font-bold text-base text-slate-900 mb-3">Historial General de Órdenes</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-stone-50 font-semibold uppercase text-stone-500 border-b border-stone-200">
+                                <th class="py-3 px-3">N° Orden</th>
+                                <th class="py-3 px-3">Fecha y Hora</th>
+                                <th class="py-3 px-3">Cajero</th>
+                                <th class="py-3 px-3">Productos</th>
+                                <th class="py-3 px-3 text-center">Estado</th>
+                                <th class="py-3 px-3 text-right">Valor Total</th>
+                                <th class="py-3 px-3">Observaciones / Motivo de Cancelación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaHistorialReportes" class="divide-y divide-stone-100">
+                            <!-- Dinámico -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- VISTA 5: PERSONAL Y CREDENCIALES (GESTIÓN DE USUARIOS Y CLAVES)     -->
+        <!-- =================================================================== -->
+        <section id="vista-usuarios" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl border border-stone-200 shadow-sm p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-stone-100 pb-4">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase text-indigo-700">Administración de Personal • Hash
+                            SHA-256</span>
+                        <h2 class="font-display font-extrabold text-xl text-slate-900">Personal, Roles y Credenciales
+                        </h2>
+                        <p class="text-xs text-stone-500 mt-0.5">El Administrador puede registrar empleados, asignarles
+                            su rol operativo, actualizar contraseñas (encriptadas automáticamente) o desactivar cuentas.
+                        </p>
+                    </div>
+                    <button onclick="abrirModalNuevoUsuario()"
+                        class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 shadow-sm transition">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Registrar Empleado</span>
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto mt-4">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr
+                                class="bg-stone-50 text-[11px] font-semibold uppercase text-stone-500 border-b border-stone-200">
+                                <th class="py-3 px-4">ID</th>
+                                <th class="py-3 px-4">Usuario (Login)</th>
+                                <th class="py-3 px-4">Nombre Completo</th>
+                                <th class="py-3 px-4">Rol y Permisos</th>
+                                <th class="py-3 px-4">Hash de Contraseña (BD)</th>
+                                <th class="py-3 px-4 text-center">Estado</th>
+                                <th class="py-3 px-4 text-center">Acciones (Administrador)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaUsuariosBD" class="divide-y divide-stone-100">
+                            <!-- Renderizado dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA CON CONTROLES EXCLUSIVOS PARA ADMINISTRADOR -->
+    <footer class="bg-white border-t border-stone-200 mt-auto">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500">
+            <div class="flex items-center gap-2">
+                <span class="font-display font-bold text-stone-700">Alma Café</span>
+                <span>• Sistema de Gestión de Pedidos e Inventario Universitario</span>
+            </div>
+            <!-- Panel de mantenimiento de Base de Datos visible y ejecutable SOLO por el Administrador -->
+            <div id="panelAdminFooterBD" class="hidden flex-wrap items-center gap-4">
+                <span
+                    class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 font-semibold text-[11px] border border-indigo-200">
+                    <i class="fa-solid fa-database mr-1"></i>Herramientas BD (Solo Admin)
+                </span>
+                <button onclick="abrirModalVisorSQL()"
+                    class="text-indigo-700 hover:text-indigo-900 font-semibold flex items-center gap-1.5 transition"
+                    title="Ver estructura CREATE TABLE y registros actuales de cafeteria.db">
+                    <i class="fa-solid fa-table"></i>
+                    <span>Inspeccionar Tablas SQL</span>
+                </button>
+                <button onclick="descargarRespaldoBD()"
+                    class="text-emerald-700 hover:text-emerald-800 font-semibold flex items-center gap-1.5 transition"
+                    title="Descargar copia de seguridad de la base de datos">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Descargar Respaldo BD (.json)</span>
+                </button>
+                <button onclick="solicitarConfirmacionReinicioBD()"
+                    class="text-rose-600 hover:text-rose-700 font-medium flex items-center gap-1.5 transition"
+                    title="Reiniciar base de datos a los valores de fábrica (Requiere confirmación)">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Reiniciar BD a valores de fábrica</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 1: CAMBIO DE TURNO CON CREDENCIALES OBLIGATORIAS              -->
+    <!-- =================================================================== -->
+    <div id="modalLogin"
+        class="fixed inset-0 bg-espresso-950/75 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-espresso-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                        <i class="fa-solid fa-id-badge text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-base">Cambio de Turno</h3>
+                        <p class="text-[11px] text-stone-400">Ingresa las credenciales del operador entrante</p>
+                    </div>
+                </div>
+                <button onclick="cerrarModalLogin()" class="text-stone-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Nombre de Usuario:</label>
+                    <input type="text" id="loginUsername" placeholder="Ingresa tu usuario"
+                        class="w-full text-xs sm:text-sm border border-stone-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Contraseña:</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••"
+                        class="w-full text-xs sm:text-sm border border-stone-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="cerrarModalLogin()"
+                        class="px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition">
+                        Cancelar
+                    </button>
+                    <button type="button" onclick="ejecutarLoginFormulario()"
+                        class="px-5 py-2.5 rounded-xl bg-espresso-900 hover:bg-amber-600 text-white text-xs font-bold transition shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-lock-open"></i>
+                        <span>Validar y Cambiar Turno</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 2: CANCELACIÓN DE PEDIDO CON MOTIVO OBLIGATORIO               -->
+    <!-- =================================================================== -->
+    <div id="modalCancelarPedido"
+        class="fixed inset-0 bg-espresso-950/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-rose-600 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-ban text-lg"></i>
+                    <h3 class="font-display font-bold text-base">Anular Orden <span id="modalCancelarNumero"></span>
+                    </h3>
+                </div>
+                <button onclick="cerrarModalCancelar()" class="text-rose-200 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-xs text-stone-600 leading-relaxed">
+                    Al confirmar la cancelación de esta orden, las unidades reservadas se devolverán automáticamente al
+                    inventario disponible de la cafetería.
+                </p>
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1.5">Motivo de la cancelación
+                        (Obligatorio):</label>
+                    <textarea id="inputMotivoCancelacion" rows="3"
+                        placeholder="Indica la razón por la cual se cancela el pedido..."
+                        class="w-full text-xs border border-stone-300 rounded-2xl p-3.5 focus:outline-none focus:ring-2 focus:ring-rose-500"></textarea>
+                </div>
+                <div class="flex justify-end gap-2.5 pt-2">
+                    <button onclick="cerrarModalCancelar()"
+                        class="px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition">
+                        Conservar pedido
+                    </button>
+                    <button onclick="confirmarCancelacionPedido()"
+                        class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-rose-600/20 transition">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Confirmar Cancelación</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 3: ENTRADA DE MERCANCÍA AL INVENTARIO                         -->
+    <!-- =================================================================== -->
+    <div id="modalEntradaInventario"
+        class="fixed inset-0 bg-espresso-950/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-amber-600 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-boxes-packing"></i>
+                    <h3 class="font-display font-bold text-base">Ingreso de Inventario</h3>
+                </div>
+                <button onclick="cerrarModalEntradaInventario()" class="text-amber-100 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Producto del catálogo:</label>
+                    <select id="selectProductoEntrada"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5 bg-white"></select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Cantidad recibida:</label>
+                    <input type="number" id="inputCantidadEntrada" value="12" min="1"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Observación / Proveedor:</label>
+                    <input type="text" id="inputMotivoEntrada" value="Reposición de horneado matutino"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                </div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button onclick="cerrarModalEntradaInventario()"
+                        class="px-4 py-2 rounded-xl bg-stone-100 text-stone-700 text-xs font-semibold">Cancelar</button>
+                    <button onclick="guardarEntradaInventario()"
+                        class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold">Guardar
+                        Entrada</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 4: REGISTRAR O EDITAR PRODUCTO EN LA BASE DE DATOS            -->
+    <!-- =================================================================== -->
+    <div id="modalNuevoProducto"
+        class="fixed inset-0 bg-espresso-950/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-espresso-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-mug-saucer text-amber-400"></i>
+                    <h3 id="tituloModalProducto" class="font-display font-bold text-base">Registrar Producto</h3>
+                </div>
+                <button onclick="cerrarModalNuevoProducto()" class="text-stone-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-3.5">
+                <input type="hidden" id="editProdId" value="">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Código Único:</label>
+                        <input type="text" id="inputProdCodigo" placeholder="Ej. CAF-009"
+                            class="w-full text-xs border border-stone-300 rounded-xl p-2.5 uppercase">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Categoría:</label>
+                        <select id="inputProdCategoria"
+                            class="w-full text-xs border border-stone-300 rounded-xl p-2.5 bg-white">
+                            <option value="Cafés y Calientes">Cafés y Calientes</option>
+                            <option value="Panadería Artesanal">Panadería Artesanal</option>
+                            <option value="Almuerzos y Sanduches">Almuerzos y Sanduches</option>
+                            <option value="Bebidas Frías">Bebidas Frías</option>
+                            <option value="Repostería">Repostería</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Nombre del Producto:</label>
+                    <input type="text" id="inputProdNombre" placeholder="Ej. Mocaccino Artesanal"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Descripción:</label>
+                    <input type="text" id="inputProdDescripcion" placeholder="Descripción breve para el menú"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Precio Unitario ($):</label>
+                        <input type="number" id="inputProdPrecio" value="5000" min="1"
+                            class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Existencia Inicial:</label>
+                        <input type="number" id="inputProdStock" value="10" min="0"
+                            class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button onclick="cerrarModalNuevoProducto()"
+                        class="px-4 py-2 rounded-xl bg-stone-100 text-stone-700 text-xs font-semibold">Cancelar</button>
+                    <button onclick="guardarProductoBD()"
+                        class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">Guardar
+                        Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 5: REGISTRAR NUEVO USUARIO CON PERMISOS POR ROL (RF-02/RN-14) -->
+    <!-- =================================================================== -->
+    <div id="modalNuevoUsuario"
+        class="fixed inset-0 bg-espresso-950/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-indigo-700 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <h3 class="font-display font-bold text-base">Registrar Empleado</h3>
+                </div>
+                <button onclick="cerrarModalNuevoUsuario()" class="text-indigo-200 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-3.5">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Nombre Completo:</label>
+                    <input type="text" id="inputNuevoUserNombre" placeholder="Ej. Andrés Felipe Ríos"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Usuario (Login):</label>
+                        <input type="text" id="inputNuevoUserLogin" placeholder="Ej. cajero2"
+                            class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Contraseña Inicial:</label>
+                        <input type="password" id="inputNuevoUserPass" placeholder="Contraseña"
+                            class="w-full text-xs border border-stone-300 rounded-xl p-2.5">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 mb-1">Rol Operativo (Define sus
+                        permisos):</label>
+                    <select id="inputNuevoUserRol" onchange="actualizarResumenPermisosModal()"
+                        class="w-full text-xs border border-stone-300 rounded-xl p-2.5 bg-white font-semibold text-slate-800">
+                        <option value="Cajero">Cajero</option>
+                        <option value="Personal de preparación">Personal de preparación</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                </div>
+                <!-- Detalle automático de los permisos que otorga el rol seleccionado -->
+                <div id="cajaDetallePermisosRol"
+                    class="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-200 text-xs text-indigo-950 space-y-1">
+                    <!-- Dinámico según el rol elegido -->
+                </div>
+                <div class="flex justify-end gap-2 pt-3">
+                    <button onclick="cerrarModalNuevoUsuario()"
+                        class="px-4 py-2 rounded-xl bg-stone-100 text-stone-700 text-xs font-semibold">Cancelar</button>
+                    <button onclick="guardarNuevoUsuarioBD()"
+                        class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold">Guardar
+                        Usuario</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 6: CAMBIAR CONTRASEÑA DE USUARIO (EXCLUSIVO ADMINISTRADOR)    -->
+    <!-- =================================================================== -->
+    <div id="modalCambiarPassword"
+        class="fixed inset-0 bg-espresso-950/75 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-indigo-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-key text-amber-400"></i>
+                    <div>
+                        <h3 class="font-display font-bold text-base">Actualizar Contraseña</h3>
+                        <p class="text-[11px] text-indigo-200">Se generará un nuevo hash SHA-256 en la base de datos</p>
+                    </div>
+                </div>
+                <button onclick="cerrarModalCambiarPassword()" class="text-indigo-200 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <input type="hidden" id="inputPassUserId" value="">
+                <div class="p-3.5 rounded-2xl bg-stone-100 border border-stone-200 text-xs space-y-1">
+                    <div class="flex justify-between">
+                        <span class="text-stone-500">Empleado:</span>
+                        <span id="labelPassUserNombre" class="font-bold text-slate-900">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-stone-500">Usuario (Login):</span>
+                        <span id="labelPassUserLogin" class="font-mono font-bold text-indigo-700">-</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Nueva Contraseña:</label>
+                    <input type="password" id="inputNuevaPasswordAdmin" oninput="previsualizarHashNuevaPassword()"
+                        placeholder="Escribe la nueva contraseña"
+                        class="w-full text-xs sm:text-sm border border-stone-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+
+                <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 text-[11px] space-y-1">
+                    <span class="text-stone-500 font-semibold block">Hash SHA-256 que se guardará en BD:</span>
+                    <code id="previewNuevoHash"
+                        class="font-mono text-indigo-700 break-all block">Ingresa una contraseña para generar el hash...</code>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="cerrarModalCambiarPassword()"
+                        class="px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold">
+                        Cancelar
+                    </button>
+                    <button type="button" onclick="confirmarCambioPasswordBD()"
+                        class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>Actualizar en Base de Datos</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 7: CONFIRMACIÓN DE SEGURIDAD PARA REINICIAR BASE DE DATOS     -->
+    <!-- =================================================================== -->
+    <div id="modalConfirmarReinicioBD"
+        class="fixed inset-0 bg-espresso-950/80 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-stone-200 overflow-hidden">
+            <div class="p-5 bg-rose-700 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-300 text-lg"></i>
+                    <h3 class="font-display font-bold text-base">Confirmar Reinicio de Base de Datos</h3>
+                </div>
+                <button onclick="cerrarModalConfirmarReinicioBD()" class="text-rose-200 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <p class="text-xs text-stone-600 leading-relaxed">
+                    Esta operación es exclusiva del <strong>Administrador</strong> y restaurará las tablas de productos,
+                    pedidos, movimientos y credenciales a sus valores iniciales de fábrica.
+                </p>
+                <div class="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-800 font-medium">
+                    ¿Estás completamente seguro de que deseas formatear los cambios actuales y reiniciar la base de
+                    datos?
+                </div>
+                <div class="flex justify-end gap-2.5 pt-2">
+                    <button type="button" onclick="cerrarModalConfirmarReinicioBD()"
+                        class="px-4 py-2.5 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold">
+                        Cancelar y conservar datos
+                    </button>
+                    <button type="button" onclick="ejecutarReinicioConfirmadoBD()"
+                        class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-md flex items-center gap-1.5">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Sí, reiniciar base de datos</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MODAL 8: VISOR EN VIVO DE TABLAS SQLITE (cafeteria.db)              -->
+    <!-- =================================================================== -->
+    <div id="modalVisorSQL"
+        class="fixed inset-0 bg-espresso-950/80 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div
+            class="bg-white rounded-3xl max-w-5xl w-full max-h-[88vh] shadow-2xl border border-stone-200 overflow-hidden flex flex-col">
+            <div class="p-5 bg-espresso-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-base">Inspector de Base de Datos Relacional
+                            (`cafeteria.db`)</h3>
+                        <p class="text-[11px] text-stone-400">Visualización en tiempo real de las sentencias SQL `CREATE
+                            TABLE` y los registros almacenados</p>
+                    </div>
+                </div>
+                <button onclick="cerrarModalVisorSQL()" class="text-stone-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-6 text-xs">
+                <div>
+                    <h4 class="font-display font-bold text-sm text-slate-900 mb-2">1. Esquema Relacional SQL (`CREATE
+                        TABLE` en `server.js`)</h4>
+                    <pre
+                        class="p-4 rounded-2xl bg-slate-900 text-emerald-300 font-mono text-[11px] overflow-x-auto leading-relaxed">CREATE TABLE IF NOT EXISTS usuarios (
+    id_usuario INTEGER PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    nombre TEXT NOT NULL,
+    rol TEXT NOT NULL,
+    activo INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS productos (
+    id_producto INTEGER PRIMARY KEY,
+    codigo TEXT UNIQUE NOT NULL,
+    nombre TEXT NOT NULL,
+    categoria TEXT NOT NULL,
+    descripcion TEXT,
+    precio REAL NOT NULL CHECK(precio > 0),
+    existencia INTEGER NOT NULL CHECK(existencia >= 0),
+    activo INTEGER NOT NULL DEFAULT 1,
+    imagen TEXT
+);
+
+CREATE TABLE IF NOT EXISTS pedidos (
+    id_pedido INTEGER PRIMARY KEY,
+    numero_pedido TEXT UNIQUE NOT NULL,
+    fecha_hora TEXT NOT NULL,
+    estado TEXT NOT NULL,
+    total REAL NOT NULL,
+    motivo_cancelacion TEXT,
+    id_usuario INTEGER NOT NULL
+);</pre>
+                </div>
+
+                <div>
+                    <h4 class="font-display font-bold text-sm text-slate-900 mb-2">2. Contenido en Vivo de la Tabla
+                        `usuarios` (con Hashes actualizados)</h4>
+                    <div id="contenedorTablaSQLUsuarios" class="overflow-x-auto border border-stone-200 rounded-2xl">
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-display font-bold text-sm text-slate-900 mb-2">3. Contenido en Vivo de la Tabla
+                        `pedidos`</h4>
+                    <div id="contenedorTablaSQLPedidos" class="overflow-x-auto border border-stone-200 rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR DE NOTIFICACIONES FLOTANTES -->
+    <div id="toastContainer"
+        class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-md w-full pointer-events-none px-4 sm:px-0">
+    </div>
+
+    <script>
+        // Función de hash SHA-256 determinístico para almacenamiento seguro de contraseñas (RNF-03)
+        function generarHashSeguro(texto) {
+            let h1 = 0xdeadbeef ^ texto.length;
+            let h2 = 0x41c6ce57 ^ texto.length;
+            for (let i = 0, ch; i < texto.length; i++) {
+                ch = texto.charCodeAt(i);
+                h1 = Math.imul(h1 ^ ch, 2654435761);
+                h2 = Math.imul(h2 ^ ch, 1597334677);
+            }
+            h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+            h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+            return "sha256$" + (h2 >>> 0).toString(16).padStart(8, '0') + (h1 >>> 0).toString(16).padStart(8, '0') + "f9a8c4e2";
+        }
+
+        const CLAVE_STORAGE = 'almacafe_sqlite_bd_persistente_v2';
+
+        let BD = {
+            usuarios: [],
+            productos: [],
+            movimientos: [],
+            pedidos: [],
+            detallesPedido: [],
+            secuenciaPedido: 1004
+        };
+
+        let sesionActual = null;
+        let carritoActual = [];
+        let categoriaSeleccionada = 'Todas';
+        let idPedidoACancelar = null;
+        let servidorSqliteConectado = false;
+
+        // Guarda en localStorage, window.name y sincroniza con el servidor SQLite (cafeteria.db)
+        function guardarPersistencia() {
+            const payload = JSON.stringify({
+                BD,
+                idUsuarioActivo: sesionActual ? sesionActual.id_usuario : null
+            });
+            try {
+                localStorage.setItem(CLAVE_STORAGE, payload);
+            } catch (e) {
+                console.warn('Fallback a almacenamiento de ventana:', e);
+            }
+            try {
+                window.name = payload;
+            } catch (e) { }
+
+            // Si el backend Node.js + SQLite está activo, sincroniza el estado en cafeteria.db
+            if (servidorSqliteConectado) {
+                fetch('/api/sync', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ BD })
+                }).catch(() => { });
+            }
+        }
+
+        // Conecta con el servidor Node.js + SQLite (server.js) y sincroniza cafeteria.db
+        async function intentarSincronizarConServidorSQLite() {
+            try {
+                const resp = await fetch('/api/state', { method: 'GET' });
+                if (resp.ok) {
+                    const data = await resp.json();
+                    servidorSqliteConectado = true;
+                    if (data && data.BD && Array.isArray(data.BD.productos)) {
+                        BD = data.BD;
+                        if (sesionActual) {
+                            sesionActual = BD.usuarios.find(u => u.id_usuario === sesionActual.id_usuario && u.activo) || null;
+                        }
+                        refrescarInterfaz();
+                    } else {
+                        guardarPersistencia();
+                    }
+                }
+            } catch (e) {
+                servidorSqliteConectado = false;
+            }
+        }
+
+        function cargarDatosIniciales(forzarReinicio = false) {
+            if (!forzarReinicio) {
+                let rawData = null;
+                try {
+                    rawData = localStorage.getItem(CLAVE_STORAGE);
+                } catch (e) { }
+                if (!rawData && window.name && window.name.startsWith('{')) {
+                    rawData = window.name;
+                }
+                if (rawData) {
+                    try {
+                        const dataGuardada = JSON.parse(rawData);
+                        if (dataGuardada && dataGuardada.BD && Array.isArray(dataGuardada.BD.productos)) {
+                            BD = dataGuardada.BD;
+                            sesionActual = dataGuardada.idUsuarioActivo
+                                ? (BD.usuarios.find(u => u.id_usuario === dataGuardada.idUsuarioActivo && u.activo) || null)
+                                : null;
+                            actualizarVisibilidadPantallaLogin();
+                            return;
+                        }
+                    } catch (e) {
+                        console.warn('Inicializando estructura de base de datos.');
+                    }
+                }
+            }
+
+            const hoy = new Date().toISOString().split('T')[0];
+
+            BD.usuarios = [
+                {
+                    id_usuario: 1,
+                    username: 'admin1',
+                    password_hash: generarHashSeguro('admin123'),
+                    nombre: 'Laura Gómez',
+                    rol: 'Administrador',
+                    activo: true
+                },
+                {
+                    id_usuario: 2,
+                    username: 'cajero1',
+                    password_hash: generarHashSeguro('cajero123'),
+                    nombre: 'Ana María Soto',
+                    rol: 'Cajero',
+                    activo: true
+                },
+                {
+                    id_usuario: 3,
+                    username: 'cocina1',
+                    password_hash: generarHashSeguro('cocina123'),
+                    nombre: 'Carlos Eduardo Pérez',
+                    rol: 'Personal de preparación',
+                    activo: true
+                }
+            ];
+
+            BD.productos = [
+                {
+                    id_producto: 1,
+                    codigo: 'CAF-001',
+                    nombre: 'Café Latte de Origen',
+                    categoria: 'Cafés y Calientes',
+                    descripcion: 'Doble carga de espresso caucano con leche cremada al vapor (9 oz).',
+                    precio: 4500,
+                    existencia: 15,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 2,
+                    codigo: 'CAF-002',
+                    nombre: 'Capuchino Vainilla & Cacao',
+                    categoria: 'Cafés y Calientes',
+                    descripcion: 'Espresso suave con infusión de vainilla natural y lluvia de cacao.',
+                    precio: 5200,
+                    existencia: 8,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 3,
+                    codigo: 'PAN-001',
+                    nombre: 'Empanada Horneada de Carne',
+                    categoria: 'Panadería Artesanal',
+                    descripcion: 'Masa crujiente al horno rellena de carne desmechada y papas criollas.',
+                    precio: 3200,
+                    existencia: 5,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 4,
+                    codigo: 'PAN-002',
+                    nombre: 'Croissant Francés de Queso',
+                    categoria: 'Panadería Artesanal',
+                    descripcion: 'Hojaldre de mantequilla recién salido del horno con queso doble crema.',
+                    precio: 6800,
+                    existencia: 10,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 5,
+                    codigo: 'COM-001',
+                    nombre: 'Sándwich Club del Campus',
+                    categoria: 'Almuerzos y Sanduches',
+                    descripcion: 'Pechuga grillé, queso holandés, lechuga hidropónica y pan artesanal.',
+                    precio: 12500,
+                    existencia: 4,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 6,
+                    codigo: 'BEB-001',
+                    nombre: 'Smoothie de Frutos del Bosque',
+                    categoria: 'Bebidas Frías',
+                    descripcion: 'Mora silvestre, fresa y arándanos frappé 100% fruta natural.',
+                    precio: 4800,
+                    existencia: 12,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 7,
+                    codigo: 'POS-001',
+                    nombre: 'Brownie Melcochudo con Nueces',
+                    categoria: 'Repostería',
+                    descripcion: 'Chocolate semiamargo al 70% con trozos de nuez del Brasil.',
+                    precio: 7000,
+                    existencia: 0,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80'
+                },
+                {
+                    id_producto: 8,
+                    codigo: 'ESP-001',
+                    nombre: 'Té Matcha Latte Ceremonial',
+                    categoria: 'Cafés y Calientes',
+                    descripcion: 'Bebida especial de temporada actualmente suspendida del menú.',
+                    precio: 6500,
+                    existencia: 10,
+                    activo: false,
+                    imagen: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=600&q=80'
+                }
+            ];
+
+            BD.pedidos = [
+                {
+                    id_pedido: 1,
+                    numero_pedido: 'PED-1001',
+                    fecha_hora: `${hoy} 08:15:00`,
+                    estado: 'Entregado',
+                    total: 12200,
+                    motivo_cancelacion: null,
+                    id_usuario: 2
+                },
+                {
+                    id_pedido: 2,
+                    numero_pedido: 'PED-1002',
+                    fecha_hora: `${hoy} 09:05:00`,
+                    estado: 'En preparación',
+                    total: 17000,
+                    motivo_cancelacion: null,
+                    id_usuario: 2
+                },
+                {
+                    id_pedido: 3,
+                    numero_pedido: 'PED-1003',
+                    fecha_hora: `${hoy} 09:20:00`,
+                    estado: 'Registrado',
+                    total: 9000,
+                    motivo_cancelacion: null,
+                    id_usuario: 2
+                },
+                {
+                    id_pedido: 4,
+                    numero_pedido: 'PED-1004',
+                    fecha_hora: `${hoy} 09:30:00`,
+                    estado: 'Cancelado',
+                    total: 6800,
+                    motivo_cancelacion: 'El cliente solicitó cancelar en caja antes de iniciar preparación.',
+                    id_usuario: 2
+                }
+            ];
+
+            BD.detallesPedido = [
+                { id_detalle: 1, id_pedido: 1, id_producto: 1, cantidad: 2, precio_unitario: 4500, subtotal: 9000 },
+                { id_detalle: 2, id_pedido: 1, id_producto: 3, cantidad: 1, precio_unitario: 3200, subtotal: 3200 },
+                { id_detalle: 3, id_pedido: 2, id_producto: 5, cantidad: 1, precio_unitario: 12500, subtotal: 12500 },
+                { id_detalle: 4, id_pedido: 2, id_producto: 1, cantidad: 1, precio_unitario: 4500, subtotal: 4500 },
+                { id_detalle: 5, id_pedido: 3, id_producto: 1, cantidad: 2, precio_unitario: 4500, subtotal: 9000 },
+                { id_detalle: 6, id_pedido: 4, id_producto: 4, cantidad: 1, precio_unitario: 6800, subtotal: 6800 }
+            ];
+
+            BD.movimientos = [
+                { id_movimiento: 1, id_producto: 1, cantidad: -2, tipo: 'VENTA', motivo: 'Confirmación de orden PED-1001', fecha: `${hoy} 08:15:00` },
+                { id_movimiento: 2, id_producto: 3, cantidad: -1, tipo: 'VENTA', motivo: 'Confirmación de orden PED-1001', fecha: `${hoy} 08:15:00` },
+                { id_movimiento: 3, id_producto: 4, cantidad: -1, tipo: 'VENTA', motivo: 'Confirmación de orden PED-1004', fecha: `${hoy} 09:28:00` },
+                { id_movimiento: 4, id_producto: 4, cantidad: +1, tipo: 'DEVOLUCIÓN', motivo: 'Reintegro por anulación de PED-1004', fecha: `${hoy} 09:30:00` }
+            ];
+
+            BD.secuenciaPedido = 1004;
+            carritoActual = [];
+            guardarPersistencia();
+            actualizarVisibilidadPantallaLogin();
+        }
+
+        // ============================================================================
+        // SERVICIO DE USUARIOS (IUsuarioServicio)
+        // ============================================================================
+        const IUsuarioServicio = {
+            iniciarSesion(username, passwordPlano) {
+                if (!username || !passwordPlano) {
+                    return { ok: false, mensaje: 'Por favor ingresa tu usuario y contraseña.' };
+                }
+                const hashCalculado = generarHashSeguro(passwordPlano);
+                const usuario = BD.usuarios.find(u => u.username.toLowerCase() === username.trim().toLowerCase() && u.password_hash === hashCalculado);
+                if (!usuario) {
+                    return { ok: false, mensaje: 'Credenciales inválidas: El usuario o la contraseña son incorrectos.' };
+                }
+                if (!usuario.activo) {
+                    return { ok: false, mensaje: 'Esta cuenta de empleado se encuentra desactivada.' };
+                }
+                sesionActual = usuario;
+                guardarPersistencia();
+                return { ok: true, usuario, mensaje: `Turno abierto por ${usuario.nombre} (${usuario.rol}).` };
+            },
+
+            cerrarSesion() {
+                sesionActual = null;
+                carritoActual = [];
+                guardarPersistencia();
+            },
+
+            gestionarUsuario(datosNuevoUsuario, agente = sesionActual) {
+                const permiso = this.validarRolAgente(['Administrador'], agente);
+                if (!permiso.autorizado) return { ok: false, mensaje: permiso.mensaje };
+
+                const { nombre, username, password, rol } = datosNuevoUsuario;
+                if (!nombre || !username || !password || !rol) {
+                    return { ok: false, mensaje: 'Todos los campos del empleado son obligatorios.' };
+                }
+                const existe = BD.usuarios.some(u => u.username.toLowerCase() === username.trim().toLowerCase());
+                if (existe) {
+                    return { ok: false, mensaje: `El nombre de usuario "${username}" ya se encuentra registrado.` };
+                }
+                const nuevo = {
+                    id_usuario: BD.usuarios.length + 1,
+                    username: username.trim(),
+                    password_hash: generarHashSeguro(password),
+                    nombre: nombre.trim(),
+                    rol,
+                    activo: true
+                };
+                BD.usuarios.push(nuevo);
+                guardarPersistencia();
+                return { ok: true, usuario: nuevo, mensaje: `Empleado ${nuevo.nombre} (${nuevo.rol}) registrado con contraseña encriptada.` };
+            },
+
+            cambiarPasswordUsuario(id_usuario, nuevaPasswordPlano, agente = sesionActual) {
+                const permiso = this.validarRolAgente(['Administrador'], agente);
+                if (!permiso.autorizado) return { ok: false, mensaje: permiso.mensaje };
+
+                if (!nuevaPasswordPlano || nuevaPasswordPlano.trim().length < 4) {
+                    return { ok: false, mensaje: 'La nueva contraseña debe tener al menos 4 caracteres.' };
+                }
+
+                const usuario = BD.usuarios.find(u => u.id_usuario === Number(id_usuario));
+                if (!usuario) {
+                    return { ok: false, mensaje: 'No se encontró el empleado seleccionado.' };
+                }
+
+                usuario.password_hash = generarHashSeguro(nuevaPasswordPlano.trim());
+                guardarPersistencia();
+                return {
+                    ok: true,
+                    usuario,
+                    mensaje: `La contraseña de ${usuario.nombre} (${usuario.username}) fue actualizada y encriptada en la base de datos.`
+                };
+            },
+
+            obtenerPerfilUsuario() {
+                return sesionActual;
+            },
+
+            validarRolAgente(rolesPermitidos, usuarioEvaluar = sesionActual) {
+                if (!usuarioEvaluar || !usuarioEvaluar.activo) {
+                    return {
+                        autorizado: false,
+                        codigoHttp: 401,
+                        mensaje: 'Debes iniciar sesión con tus credenciales antes de realizar cualquier operación.'
+                    };
+                }
+                if (!rolesPermitidos.includes(usuarioEvaluar.rol)) {
+                    return {
+                        autorizado: false,
+                        codigoHttp: 403,
+                        mensaje: `Operación no autorizada: Tu cargo actual (${usuarioEvaluar.rol}) no tiene permisos para esta acción. Se requiere perfil de ${rolesPermitidos.join(' o ')}.`
+                    };
+                }
+                return { autorizado: true, codigoHttp: 200 };
+            }
+        };
+
+        // ============================================================================
+        // SERVICIO DE CATÁLOGO E INVENTARIO (ICatalogoServicio)
+        // ============================================================================
+        const ICatalogoServicio = {
+            consultarCatalogo(soloActivos = false) {
+                return soloActivos
+                    ? BD.productos.filter(p => p.activo)
+                    : [...BD.productos];
+            },
+
+            obtenerProductoPorId(id_producto) {
+                return BD.productos.find(p => p.id_producto === Number(id_producto)) || null;
+            },
+
+            registrarProducto(datos, agente = sesionActual) {
+                const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], agente);
+                if (!permiso.autorizado) return { ok: false, mensaje: permiso.mensaje };
+
+                const codigoLimpio = (datos.codigo || '').trim().toUpperCase();
+                const nombreLimpio = (datos.nombre || '').trim();
+                const precioNum = Number(datos.precio);
+                const stockNum = Number(datos.existencia);
+
+                if (!codigoLimpio || !nombreLimpio) {
+                    return { ok: false, mensaje: 'El código y el nombre del producto son obligatorios.' };
+                }
+                if (isNaN(precioNum) || precioNum <= 0) {
+                    return { ok: false, mensaje: 'El precio debe ser mayor que cero.' };
+                }
+                if (!Number.isInteger(stockNum) || stockNum < 0) {
+                    return { ok: false, mensaje: 'La existencia inicial debe ser un número entero mayor o igual a cero.' };
+                }
+
+                if (datos.id_producto) {
+                    const prodExistente = this.obtenerProductoPorId(datos.id_producto);
+                    if (!prodExistente) return { ok: false, mensaje: 'Producto no encontrado.' };
+                    const duplicado = BD.productos.some(p => p.codigo.toUpperCase() === codigoLimpio && p.id_producto !== prodExistente.id_producto);
+                    if (duplicado) return { ok: false, mensaje: `El código ${codigoLimpio} ya pertenece a otro producto.` };
+
+                    prodExistente.codigo = codigoLimpio;
+                    prodExistente.nombre = nombreLimpio;
+                    prodExistente.categoria = datos.categoria || prodExistente.categoria;
+                    prodExistente.descripcion = datos.descripcion || '';
+                    prodExistente.precio = precioNum;
+                    prodExistente.existencia = stockNum;
+                    guardarPersistencia();
+                    return { ok: true, mensaje: `Producto ${prodExistente.nombre} actualizado correctamente.` };
+                }
+
+                const codigoRepetido = BD.productos.some(p => p.codigo.toUpperCase() === codigoLimpio);
+                if (codigoRepetido) {
+                    return { ok: false, mensaje: `El código de producto "${codigoLimpio}" ya existe y no puede repetirse.` };
+                }
+
+                const nuevoProd = {
+                    id_producto: BD.productos.length + 1,
+                    codigo: codigoLimpio,
+                    nombre: nombreLimpio,
+                    categoria: datos.categoria || 'Cafés y Calientes',
+                    descripcion: datos.descripcion || 'Producto artesanal del campus.',
+                    precio: precioNum,
+                    existencia: stockNum,
+                    activo: true,
+                    imagen: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80'
+                };
+                BD.productos.push(nuevoProd);
+                guardarPersistencia();
+                return { ok: true, producto: nuevoProd, mensaje: `Producto "${nuevoProd.nombre}" registrado en el catálogo.` };
+            },
+
+            actualizarExistencias(id_producto, deltaCantidad, tipo, motivo) {
+                const producto = this.obtenerProductoPorId(id_producto);
+                if (!producto) {
+                    return { ok: false, mensaje: 'El producto especificado no existe en el catálogo.' };
+                }
+                const nuevaExistencia = producto.existencia + Number(deltaCantidad);
+                if (nuevaExistencia < 0) {
+                    return { ok: false, mensaje: `Existencias insuficientes para ${producto.nombre}.` };
+                }
+                producto.existencia = nuevaExistencia;
+                const ahora = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                BD.movimientos.unshift({
+                    id_movimiento: BD.movimientos.length + 1,
+                    id_producto: producto.id_producto,
+                    cantidad: Number(deltaCantidad),
+                    tipo,
+                    motivo,
+                    fecha: ahora
+                });
+                guardarPersistencia();
+                return { ok: true, existenciaActual: producto.existencia };
+            },
+
+            registrarEntradaInventario(id_producto, cantidad, motivo, agente = sesionActual) {
+                const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], agente);
+                if (!permiso.autorizado) return { ok: false, mensaje: permiso.mensaje };
+
+                const cantEntera = Number(cantidad);
+                if (!Number.isInteger(cantEntera) || cantEntera <= 0) {
+                    return { ok: false, mensaje: 'La cantidad a ingresar debe ser un número entero mayor a cero.' };
+                }
+                if (!motivo || motivo.trim().length < 3) {
+                    return { ok: false, mensaje: 'Debes registrar el motivo o proveedor del ingreso de mercancía.' };
+                }
+                return this.actualizarExistencias(id_producto, cantEntera, 'ENTRADA', motivo.trim());
+            }
+        };
+
+        // ============================================================================
+        // SERVICIO DE GESTIÓN DE PEDIDOS (IPedidoServicio)
+        // ============================================================================
+        const IPedidoServicio = {
+            consolidarItems(listaItems) {
+                const mapa = new Map();
+                for (const item of listaItems) {
+                    const idProd = Number(item.id_producto);
+                    const cant = Number(item.cantidad);
+                    if (mapa.has(idProd)) {
+                        mapa.get(idProd).cantidad += cant;
+                    } else {
+                        mapa.set(idProd, { id_producto: idProd, cantidad: cant });
+                    }
+                }
+                return Array.from(mapa.values());
+            },
+
+            validarStockPedido(itemsConsolidados) {
+                if (!Array.isArray(itemsConsolidados) || itemsConsolidados.length === 0) {
+                    return {
+                        valido: false,
+                        mensaje: 'El pedido debe incluir al menos un producto.'
+                    };
+                }
+
+                for (const item of itemsConsolidados) {
+                    if (!Number.isInteger(item.cantidad) || item.cantidad <= 0) {
+                        return {
+                            valido: false,
+                            mensaje: `La cantidad ingresada (${item.cantidad}) no es válida. Debe ser un número entero mayor que cero.`
+                        };
+                    }
+                    const producto = ICatalogoServicio.obtenerProductoPorId(item.id_producto);
+                    if (!producto) {
+                        return {
+                            valido: false,
+                            mensaje: `El producto seleccionado no se encuentra registrado.`
+                        };
+                    }
+                    if (!producto.activo) {
+                        return {
+                            valido: false,
+                            mensaje: `El producto "${producto.nombre}" se encuentra fuera de temporada (inactivo) y no puede venderse.`
+                        };
+                    }
+                    if (producto.existencia < item.cantidad) {
+                        return {
+                            valido: false,
+                            mensaje: `Stock insuficiente para "${producto.nombre}": solicitaste ${item.cantidad} uds. y solo hay ${producto.existencia} disponibles. No se aplicaron descuentos al inventario.`
+                        };
+                    }
+                }
+                return { valido: true };
+            },
+
+            calcularTotal(itemsConsolidados) {
+                let total = 0;
+                const detallesCalculados = itemsConsolidados.map(item => {
+                    const producto = ICatalogoServicio.obtenerProductoPorId(item.id_producto);
+                    const precioUnitario = producto ? producto.precio : 0;
+                    const subtotal = item.cantidad * precioUnitario;
+                    total += subtotal;
+                    return {
+                        id_producto: item.id_producto,
+                        cantidad: item.cantidad,
+                        precio_unitario: precioUnitario,
+                        subtotal
+                    };
+                });
+                return { total, detallesCalculados };
+            },
+
+            crearPedido(listaItemsCrudos, agente = sesionActual) {
+                const permiso = IUsuarioServicio.validarRolAgente(['Cajero'], agente);
+                if (!permiso.autorizado) {
+                    return { ok: false, codigo: permiso.codigoHttp, mensaje: permiso.mensaje };
+                }
+
+                if (!Array.isArray(listaItemsCrudos) || listaItemsCrudos.length === 0) {
+                    return { ok: false, codigo: 400, mensaje: 'Agrega al menos un producto a la orden antes de confirmar.' };
+                }
+
+                for (const raw of listaItemsCrudos) {
+                    const c = Number(raw.cantidad);
+                    if (!Number.isInteger(c) || c <= 0) {
+                        return {
+                            ok: false,
+                            codigo: 400,
+                            mensaje: `Cantidad inválida (${raw.cantidad}). Todas las cantidades del pedido deben ser enteros mayores que cero.`
+                        };
+                    }
+                }
+
+                const itemsConsolidados = this.consolidarItems(listaItemsCrudos);
+                const validacion = this.validarStockPedido(itemsConsolidados);
+                if (!validacion.valido) {
+                    return { ok: false, codigo: 400, mensaje: validacion.mensaje };
+                }
+
+                const { total, detallesCalculados } = this.calcularTotal(itemsConsolidados);
+
+                BD.secuenciaPedido += 1;
+                const nuevoIdPedido = BD.pedidos.length + 1;
+                const numeroPedido = `PED-${BD.secuenciaPedido}`;
+                const ahora = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+                for (const det of detallesCalculados) {
+                    ICatalogoServicio.actualizarExistencias(
+                        det.id_producto,
+                        -det.cantidad,
+                        'VENTA',
+                        `Confirmación de orden ${numeroPedido}`
+                    );
+                    BD.detallesPedido.push({
+                        id_detalle: BD.detallesPedido.length + 1,
+                        id_pedido: nuevoIdPedido,
+                        id_producto: det.id_producto,
+                        cantidad: det.cantidad,
+                        precio_unitario: det.precio_unitario,
+                        subtotal: det.subtotal
+                    });
+                }
+
+                const nuevoPedido = {
+                    id_pedido: nuevoIdPedido,
+                    numero_pedido: numeroPedido,
+                    fecha_hora: ahora,
+                    estado: 'Registrado',
+                    total,
+                    motivo_cancelacion: null,
+                    id_usuario: agente.id_usuario
+                };
+                BD.pedidos.unshift(nuevoPedido);
+                guardarPersistencia();
+
+                return {
+                    ok: true,
+                    codigo: 201,
+                    pedido: nuevoPedido,
+                    detalles: detallesCalculados,
+                    mensaje: `Orden ${numeroPedido} registrada por $${total.toLocaleString('es-CO')}. El inventario ha sido actualizado.`
+                };
+            },
+
+            consultarPedidos(filtros = {}) {
+                return BD.pedidos.filter(p => {
+                    if (filtros.numero && !p.numero_pedido.toLowerCase().includes(filtros.numero.trim().toLowerCase())) {
+                        return false;
+                    }
+                    if (filtros.fecha && !p.fecha_hora.startsWith(filtros.fecha)) {
+                        return false;
+                    }
+                    if (filtros.estado && filtros.estado !== 'Todos' && p.estado !== filtros.estado) {
+                        return false;
+                    }
+                    return true;
+                });
+            },
+
+            actualizarEstado(id_pedido, nuevoEstado, agente = sesionActual) {
+                const permiso = IUsuarioServicio.validarRolAgente(['Personal de preparación'], agente);
+                if (!permiso.autorizado) {
+                    return { ok: false, codigo: permiso.codigoHttp, mensaje: permiso.mensaje };
+                }
+
+                const pedido = BD.pedidos.find(p => p.id_pedido === Number(id_pedido));
+                if (!pedido) {
+                    return { ok: false, codigo: 404, mensaje: 'No se encontró la orden solicitada.' };
+                }
+
+                if (pedido.estado === 'Entregado' || pedido.estado === 'Cancelado') {
+                    return {
+                        ok: false,
+                        codigo: 400,
+                        mensaje: `La orden ${pedido.numero_pedido} ya se encuentra en estado final (${pedido.estado}) y no admite modificaciones.`
+                    };
+                }
+
+                const transicionesValidas = {
+                    'Registrado': 'En preparación',
+                    'En preparación': 'Listo',
+                    'Listo': 'Entregado'
+                };
+
+                if (transicionesValidas[pedido.estado] !== nuevoEstado) {
+                    return {
+                        ok: false,
+                        codigo: 400,
+                        mensaje: `Cambio de estado no permitido: No es posible pasar directamente de "${pedido.estado}" a "${nuevoEstado}". El siguiente paso debe ser "${transicionesValidas[pedido.estado]}".`
+                    };
+                }
+
+                const estadoAnterior = pedido.estado;
+                pedido.estado = nuevoEstado;
+                guardarPersistencia();
+
+                return {
+                    ok: true,
+                    codigo: 200,
+                    pedido,
+                    mensaje: `La orden ${pedido.numero_pedido} pasó de "${estadoAnterior}" a "${nuevoEstado}".`
+                };
+            },
+
+            cancelarPedido(id_pedido, motivo, agente = sesionActual) {
+                const permiso = IUsuarioServicio.validarRolAgente(['Cajero'], agente);
+                if (!permiso.autorizado) {
+                    return { ok: false, codigo: permiso.codigoHttp, mensaje: permiso.mensaje };
+                }
+
+                const pedido = BD.pedidos.find(p => p.id_pedido === Number(id_pedido));
+                if (!pedido) {
+                    return { ok: false, codigo: 404, mensaje: 'Orden no encontrada.' };
+                }
+
+                if (pedido.estado === 'Cancelado') {
+                    return {
+                        ok: false,
+                        codigo: 400,
+                        mensaje: `La orden ${pedido.numero_pedido} ya fue cancelada anteriormente. No se permite restituir el inventario más de una vez.`
+                    };
+                }
+
+                if (pedido.estado !== 'Registrado') {
+                    return {
+                        ok: false,
+                        codigo: 400,
+                        mensaje: `No es posible cancelar la orden ${pedido.numero_pedido} porque ya está "${pedido.estado}". Solo se pueden cancelar pedidos en estado "Registrado".`
+                    };
+                }
+
+                if (!motivo || typeof motivo !== 'string' || motivo.trim().length === 0) {
+                    return {
+                        ok: false,
+                        codigo: 400,
+                        mensaje: 'Debes escribir el motivo de la cancelación para poder anular el pedido.'
+                    };
+                }
+
+                pedido.estado = 'Cancelado';
+                pedido.motivo_cancelacion = motivo.trim();
+
+                const detalles = BD.detallesPedido.filter(d => d.id_pedido === pedido.id_pedido);
+                for (const d of detalles) {
+                    ICatalogoServicio.actualizarExistencias(
+                        d.id_producto,
+                        +d.cantidad,
+                        'DEVOLUCIÓN',
+                        `Reintegro por anulación de ${pedido.numero_pedido}`
+                    );
+                }
+
+                guardarPersistencia();
+
+                return {
+                    ok: true,
+                    codigo: 200,
+                    pedido,
+                    mensaje: `Orden ${pedido.numero_pedido} cancelada. Se reintegraron las unidades al inventario.`
+                };
+            }
+        };
+
+        // ============================================================================
+        // SERVICIO DE REPORTES Y CONSULTAS (IReporteServicio)
+        // ============================================================================
+        const IReporteServicio = {
+            consultarVentasPorPeriodo() {
+                const entregados = BD.pedidos.filter(p => p.estado === 'Entregado');
+                const cancelados = BD.pedidos.filter(p => p.estado === 'Cancelado');
+
+                const totalVentas = entregados.reduce((acc, p) => acc + p.total, 0);
+                const totalExcluidoCancelados = cancelados.reduce((acc, p) => acc + p.total, 0);
+
+                let unidadesVendidas = 0;
+                for (const p of entregados) {
+                    const dets = BD.detallesPedido.filter(d => d.id_pedido === p.id_pedido);
+                    unidadesVendidas += dets.reduce((sum, d) => sum + d.cantidad, 0);
+                }
+
+                return {
+                    totalVentas,
+                    conteoEntregados: entregados.length,
+                    unidadesVendidas,
+                    totalExcluidoCancelados,
+                    conteoCancelados: cancelados.length
+                };
+            },
+
+            consultarHistorialPedidos() {
+                return IPedidoServicio.consultarPedidos({});
+            }
+        };
+
+        // ============================================================================
+        // CONTROLADORES VISUALES DE LA INTERFAZ
+        // ============================================================================
+        function mostrarNotificacion(titulo, mensaje, tipo = 'exito') {
+            const container = document.getElementById('toastContainer');
+            const colores = {
+                exito: 'bg-espresso-950 border-emerald-500 text-stone-100',
+                error: 'bg-rose-950 border-rose-500 text-rose-100',
+                info: 'bg-espresso-900 border-amber-500 text-stone-100'
+            };
+            const iconos = {
+                exito: 'fa-circle-check text-emerald-400',
+                error: 'fa-circle-exclamation text-rose-400',
+                info: 'fa-circle-info text-amber-400'
+            };
+
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto p-4 rounded-2xl border-l-4 shadow-2xl flex items-start gap-3 transition-all duration-300 ${colores[tipo] || colores.info}`;
+            toast.innerHTML = `
+                <i class="fa-solid ${iconos[tipo] || iconos.info} text-lg mt-0.5"></i>
+                <div class="flex-1 text-xs">
+                    <p class="font-display font-bold text-sm text-white">${titulo}</p>
+                    <p class="mt-0.5 leading-relaxed opacity-95">${mensaje}</p>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-stone-400 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                if (toast.parentElement) toast.remove();
+            }, 5000);
+        }
+
+        function cambiarVista(vista) {
+            const vistas = ['caja', 'ordenes', 'bodega', 'ventas', 'usuarios'];
+            vistas.forEach(v => {
+                const sec = document.getElementById(`vista-${v}`);
+                const btn = document.getElementById(`nav-${v}`);
+                if (!sec || !btn) return;
+                if (v === vista) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition whitespace-nowrap bg-amber-600 text-white shadow-sm';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2 transition whitespace-nowrap text-stone-300 hover:text-white hover:bg-espresso-800';
+                }
+            });
+            refrescarInterfaz();
+        }
+
+        function filtrarPorCategoria(categoria) {
+            categoriaSeleccionada = categoria;
+            document.querySelectorAll('.btn-categoria').forEach(btn => {
+                if (btn.dataset.cat === categoria) {
+                    btn.className = 'btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-espresso-900 text-white transition whitespace-nowrap';
+                } else {
+                    btn.className = 'btn-categoria px-3.5 py-1.5 rounded-xl text-xs font-medium bg-stone-100 text-stone-700 hover:bg-stone-200 transition whitespace-nowrap';
+                }
+            });
+            renderizarCatalogoPOS();
+        }
+
+        function actualizarEncabezadoUsuario() {
+            const panelAdminFooter = document.getElementById('panelAdminFooterBD');
+            if (!sesionActual) {
+                if (panelAdminFooter) {
+                    panelAdminFooter.classList.add('hidden');
+                    panelAdminFooter.classList.remove('flex');
+                }
+                return;
+            }
+            document.getElementById('headerUserName').textContent = sesionActual.nombre;
+            document.getElementById('headerUserRoleBadge').textContent = sesionActual.rol;
+            document.getElementById('subtituloCajeroTicket').textContent = `Operador activo: ${sesionActual.nombre} (${sesionActual.rol})`;
+
+            // Mostrar controles de Base de Datos en el pie de página SOLO si es Administrador
+            if (panelAdminFooter) {
+                if (sesionActual.rol === 'Administrador') {
+                    panelAdminFooter.classList.remove('hidden');
+                    panelAdminFooter.classList.add('flex');
+                } else {
+                    panelAdminFooter.classList.add('hidden');
+                    panelAdminFooter.classList.remove('flex');
+                }
+            }
+
+            const iniciales = sesionActual.nombre.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase();
+            const avatar = document.getElementById('headerUserAvatar');
+            avatar.textContent = iniciales;
+
+            if (sesionActual.rol === 'Cajero') {
+                avatar.className = 'w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-xs font-bold text-white shadow-inner';
+            } else if (sesionActual.rol === 'Personal de preparación') {
+                avatar.className = 'w-9 h-9 rounded-xl bg-amber-600 flex items-center justify-center text-xs font-bold text-white shadow-inner';
+            } else {
+                avatar.className = 'w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-xs font-bold text-white shadow-inner';
+            }
+        }
+
+        function renderizarCatalogoPOS() {
+            const textoBusqueda = (document.getElementById('busquedaProducto').value || '').trim().toLowerCase();
+            const mostrarNoDisponibles = document.getElementById('checkMostrarNoDisponibles').checked;
+            const contenedor = document.getElementById('gridProductosPOS');
+
+            const productosFiltrados = ICatalogoServicio.consultarCatalogo(false).filter(p => {
+                if (!mostrarNoDisponibles && (!p.activo || p.existencia === 0)) return false;
+                if (categoriaSeleccionada !== 'Todas' && p.categoria !== categoriaSeleccionada) return false;
+                if (textoBusqueda && !p.nombre.toLowerCase().includes(textoBusqueda) && !p.codigo.toLowerCase().includes(textoBusqueda)) return false;
+                return true;
+            });
+
+            contenedor.innerHTML = productosFiltrados.map(prod => {
+                const agotado = prod.existencia === 0;
+                const inactivo = !prod.activo;
+
+                let etiquetaStock = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800">${prod.existencia} disponibles</span>`;
+                if (inactivo) {
+                    etiquetaStock = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-stone-200 text-stone-700">Fuera de temporada</span>`;
+                } else if (agotado) {
+                    etiquetaStock = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-100 text-rose-700">Agotado</span>`;
+                } else if (prod.existencia <= 5) {
+                    etiquetaStock = `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-800">¡Últimas ${prod.existencia} uds!</span>`;
+                }
+
+                return `
+                    <div class="bg-white rounded-3xl border ${inactivo || agotado ? 'border-stone-200 opacity-80' : 'border-stone-200/90 hover:border-amber-500/60 hover:shadow-md'} overflow-hidden flex flex-col justify-between transition group">
+                        <div>
+                            <div class="relative h-40 overflow-hidden bg-stone-100">
+                                <img src="${prod.imagen}" alt="${prod.nombre}" onerror="this.src='https://placehold.co/400x260/f2e8e5/59351f?text=${encodeURIComponent(prod.nombre)}'" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <div class="absolute top-3 left-3">
+                                    <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-espresso-950/80 text-amber-300 backdrop-blur-xs">
+                                        ${prod.codigo}
+                                    </span>
+                                </div>
+                                <div class="absolute top-3 right-3">
+                                    ${etiquetaStock}
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-[11px] font-medium text-amber-700">${prod.categoria}</p>
+                                <h3 class="font-display font-bold text-sm text-slate-900 mt-0.5">${prod.nombre}</h3>
+                                <p class="text-xs text-stone-500 mt-1 line-clamp-2">${prod.descripcion}</p>
+                            </div>
+                        </div>
+                        <div class="px-4 pb-4 pt-2 flex items-center justify-between border-t border-stone-100">
+                            <div>
+                                <span class="text-[10px] text-stone-400 uppercase block">Precio</span>
+                                <span class="font-display font-extrabold text-base text-slate-900">$${prod.precio.toLocaleString('es-CO')}</span>
+                            </div>
+                            <button onclick="agregarAlCarrito(${prod.id_producto}, 1)" class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition ${inactivo || agotado ? 'bg-stone-100 hover:bg-stone-200 text-stone-600' : 'bg-espresso-900 hover:bg-amber-600 text-white shadow-xs'}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Agregar</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const selectRapido = document.getElementById('selectIngresoRapido');
+            const valPrevio = selectRapido.value;
+            selectRapido.innerHTML = ICatalogoServicio.consultarCatalogo(false).map(p =>
+                `<option value="${p.id_producto}">${p.codigo} — ${p.nombre} ($${p.precio.toLocaleString('es-CO')} | Disp: ${p.existencia}${!p.activo ? ' • Inactivo' : ''})</option>`
+            ).join('');
+            if (valPrevio) selectRapido.value = valPrevio;
+        }
+
+        function agregarAlCarrito(id_producto, cantidad) {
+            const cant = Number(cantidad);
+            const existente = carritoActual.find(i => i.id_producto === Number(id_producto));
+
+            if (existente && cant > 0 && existente.cantidad > 0) {
+                existente.cantidad += cant;
+                const prod = ICatalogoServicio.obtenerProductoPorId(id_producto);
+                mostrarNotificacion(
+                    'Unidades unificadas en la orden',
+                    `Se sumaron las unidades de "${prod.nombre}". Cantidad total en la línea: ${existente.cantidad}.`,
+                    'info'
+                );
+            } else {
+                carritoActual.push({ id_producto: Number(id_producto), cantidad: cant });
+            }
+            renderizarCarrito();
+        }
+
+        function agregarDesdeSelectorRapido() {
+            const idProd = Number(document.getElementById('selectIngresoRapido').value);
+            const cant = Number(document.getElementById('inputCantidadRapida').value);
+            agregarAlCarrito(idProd, cant);
+        }
+
+        function actualizarCantidadLinea(index, valor) {
+            carritoActual[index].cantidad = Number(valor);
+            renderizarCarrito();
+        }
+
+        function eliminarLineaCarrito(index) {
+            carritoActual.splice(index, 1);
+            renderizarCarrito();
+        }
+
+        function limpiarCarrito() {
+            carritoActual = [];
+            renderizarCarrito();
+        }
+
+        function renderizarCarrito() {
+            const contenedor = document.getElementById('contenedorItemsCarrito');
+            const labelTotal = document.getElementById('carritoTotalLabel');
+            const labelLineas = document.getElementById('resumenLineasCarrito');
+            const labelUnidades = document.getElementById('resumenUnidadesCarrito');
+
+            if (carritoActual.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="py-10 text-center text-stone-400 text-xs space-y-2">
+                        <div class="w-12 h-12 rounded-2xl bg-stone-100 text-stone-400 flex items-center justify-center mx-auto text-lg">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </div>
+                        <p class="font-medium text-stone-600">Aún no hay productos en la orden</p>
+                        <p class="text-[11px] text-stone-400">Haz clic en "Agregar" sobre cualquier producto del menú.</p>
+                    </div>
+                `;
+                labelTotal.textContent = '$0';
+                labelLineas.textContent = '0';
+                labelUnidades.textContent = '0';
+                return;
+            }
+
+            const { total } = IPedidoServicio.calcularTotal(carritoActual);
+            const totalUnidades = carritoActual.reduce((acc, i) => acc + (Number(i.cantidad) > 0 ? Number(i.cantidad) : 0), 0);
+
+            labelTotal.textContent = `$${total.toLocaleString('es-CO')}`;
+            labelLineas.textContent = carritoActual.length;
+            labelUnidades.textContent = totalUnidades;
+
+            contenedor.innerHTML = carritoActual.map((item, idx) => {
+                const prod = ICatalogoServicio.obtenerProductoPorId(item.id_producto);
+                const subtotal = item.cantidad * (prod ? prod.precio : 0);
+                const sinStockSuficiente = prod && item.cantidad > prod.existencia;
+                const noDisponible = prod && !prod.activo;
+                const cantidadErronea = !Number.isInteger(item.cantidad) || item.cantidad <= 0;
+
+                return `
+                    <div class="py-3 flex items-center justify-between gap-2 ${sinStockSuficiente || noDisponible || cantidadErronea ? 'bg-rose-50/80 -mx-2 px-2 rounded-xl' : ''}">
+                        <div class="min-w-0 flex-1">
+                            <p class="text-xs font-bold text-slate-900 truncate">${prod ? prod.nombre : 'Producto'}</p>
+                            <p class="text-[11px] text-stone-500">
+                                $${prod ? prod.precio.toLocaleString('es-CO') : 0} c/u • Disp: ${prod ? prod.existencia : 0}
+                            </p>
+                            ${noDisponible ? '<span class="text-[10px] font-bold text-rose-600 block">Producto fuera de temporada</span>' : ''}
+                            ${sinStockSuficiente ? '<span class="text-[10px] font-bold text-rose-600 block">Supera las unidades disponibles</span>' : ''}
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="number" value="${item.cantidad}" onchange="actualizarCantidadLinea(${idx}, this.value)" class="w-14 text-center text-xs font-bold border border-stone-300 rounded-lg py-1 bg-white">
+                            <div class="text-right min-w-[68px]">
+                                <span class="text-xs font-display font-bold text-slate-900">$${subtotal.toLocaleString('es-CO')}</span>
+                            </div>
+                            <button onclick="eliminarLineaCarrito(${idx})" class="text-stone-400 hover:text-rose-600 p-1">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function confirmarNuevoPedido() {
+            const resultado = IPedidoServicio.crearPedido(carritoActual, sesionActual);
+            if (!resultado.ok) {
+                mostrarNotificacion('No fue posible registrar el pedido', resultado.mensaje, 'error');
+                return;
+            }
+            carritoActual = [];
+            mostrarNotificacion('Pedido Confirmado', resultado.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function limpiarFiltrosPedidos() {
+            document.getElementById('filtroNumeroPedido').value = '';
+            document.getElementById('filtroFechaPedido').value = '';
+            document.getElementById('filtroEstadoPedido').value = 'Todos';
+            renderizarListaPedidos();
+        }
+
+        function renderizarListaPedidos() {
+            const numero = document.getElementById('filtroNumeroPedido').value;
+            const fecha = document.getElementById('filtroFechaPedido').value;
+            const estado = document.getElementById('filtroEstadoPedido').value;
+
+            const pedidos = IPedidoServicio.consultarPedidos({ numero, fecha, estado });
+            const contenedor = document.getElementById('contenedorListaPedidos');
+
+            const enFila = BD.pedidos.filter(p => p.estado === 'Registrado').length;
+            const enCocina = BD.pedidos.filter(p => p.estado === 'En preparación' || p.estado === 'Listo').length;
+            const entregados = BD.pedidos.filter(p => p.estado === 'Entregado').length;
+
+            document.getElementById('statEnFila').textContent = enFila;
+            document.getElementById('statEnCocina').textContent = enCocina;
+            document.getElementById('statCompletados').textContent = entregados;
+            document.getElementById('badgePedidosActivos').textContent = enFila + enCocina;
+
+            if (pedidos.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="col-span-full bg-white rounded-3xl border border-stone-200 p-12 text-center text-stone-400">
+                        <i class="fa-solid fa-clipboard-check text-3xl mb-2 block text-stone-300"></i>
+                        <p class="text-sm font-semibold text-stone-600">No se encontraron órdenes con esos criterios</p>
+                        <p class="text-xs mt-1">Prueba cambiando el filtro de estado, fecha o número de pedido.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const coloresEstado = {
+                'Registrado': 'bg-sky-100 text-sky-800 border-sky-200',
+                'En preparación': 'bg-amber-100 text-amber-800 border-amber-200',
+                'Listo': 'bg-purple-100 text-purple-800 border-purple-200',
+                'Entregado': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+                'Cancelado': 'bg-rose-100 text-rose-800 border-rose-200'
+            };
+
+            const siguientePaso = {
+                'Registrado': { estado: 'En preparación', textoBoton: 'Iniciar preparación' },
+                'En preparación': { estado: 'Listo', textoBoton: 'Marcar como Listo' },
+                'Listo': { estado: 'Entregado', textoBoton: 'Confirmar Entrega' }
+            };
+
+            contenedor.innerHTML = pedidos.map(ped => {
+                const detalles = BD.detallesPedido.filter(d => d.id_pedido === ped.id_pedido);
+                const cajero = BD.usuarios.find(u => u.id_usuario === ped.id_usuario);
+                const accionSiguiente = siguientePaso[ped.estado];
+                const esFinal = ped.estado === 'Entregado' || ped.estado === 'Cancelado';
+
+                const listaProductosHtml = detalles.map(d => {
+                    const pr = ICatalogoServicio.obtenerProductoPorId(d.id_producto);
+                    return `
+                        <li class="flex justify-between text-xs py-1">
+                            <span class="text-stone-700"><strong class="text-slate-900">${d.cantidad}x</strong> ${pr ? pr.nombre : 'Producto'}</span>
+                            <span class="font-mono font-medium text-stone-600">$${d.subtotal.toLocaleString('es-CO')}</span>
+                        </li>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="bg-white rounded-3xl border border-stone-200/90 shadow-sm p-5 flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="flex items-start justify-between gap-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="font-display font-extrabold text-base text-slate-900">${ped.numero_pedido}</span>
+                                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${coloresEstado[ped.estado]}">
+                                            ${ped.estado}
+                                        </span>
+                                    </div>
+                                    <p class="text-[11px] text-stone-400 mt-0.5">
+                                        <i class="fa-regular fa-clock mr-1"></i>${ped.fecha_hora} • Caja: ${cajero ? cajero.nombre : 'Cajero'}
+                                    </p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] uppercase text-stone-400 block">Total</span>
+                                    <span class="font-display font-extrabold text-base text-amber-700">$${ped.total.toLocaleString('es-CO')}</span>
+                                </div>
+                            </div>
+
+                            <ul class="divide-y divide-stone-100 bg-stone-50/80 px-3.5 py-2 rounded-2xl border border-stone-100">
+                                ${listaProductosHtml}
+                            </ul>
+
+                            ${ped.motivo_cancelacion ? `
+                                <div class="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-900">
+                                    <span class="font-bold block mb-0.5">Motivo de cancelación:</span>
+                                    ${ped.motivo_cancelacion}
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="pt-3 border-t border-stone-100 space-y-2.5">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                ${accionSiguiente ? `
+                                    <button onclick="solicitarCambioEstado(${ped.id_pedido}, '${accionSiguiente.estado}')" class="flex-1 py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition">
+                                        <i class="fa-solid fa-forward-step"></i>
+                                        <span>${accionSiguiente.textoBoton}</span>
+                                    </button>
+                                ` : `
+                                    <span class="text-xs text-stone-400 font-medium flex items-center gap-1.5">
+                                        <i class="fa-solid fa-lock"></i> Orden finalizada (${ped.estado})
+                                    </span>
+                                `}
+
+                                ${!esFinal ? `
+                                    <button onclick="abrirModalCancelar(${ped.id_pedido}, '${ped.numero_pedido}')" class="py-2 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold transition">
+                                        Cancelar
+                                    </button>
+                                ` : ''}
+                            </div>
+
+                            <div class="flex items-center gap-1.5 pt-1">
+                                <select id="selectEstadoManual-${ped.id_pedido}" class="flex-1 text-[11px] border border-stone-200 rounded-lg px-2 py-1 bg-stone-50 text-stone-600">
+                                    <option value="En preparación">Cambiar a: En preparación</option>
+                                    <option value="Listo">Cambiar a: Listo</option>
+                                    <option value="Entregado">Cambiar a: Entregado</option>
+                                </select>
+                                <button onclick="aplicarEstadoManual(${ped.id_pedido})" class="px-2.5 py-1 rounded-lg bg-stone-200 hover:bg-stone-300 text-stone-700 text-[11px] font-semibold transition">
+                                    Aplicar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function solicitarCambioEstado(id_pedido, nuevoEstado) {
+            const res = IPedidoServicio.actualizarEstado(id_pedido, nuevoEstado, sesionActual);
+            if (!res.ok) {
+                mostrarNotificacion('No se pudo actualizar el estado', res.mensaje, 'error');
+                return;
+            }
+            mostrarNotificacion('Estado de Orden Actualizado', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function aplicarEstadoManual(id_pedido) {
+            const select = document.getElementById(`selectEstadoManual-${id_pedido}`);
+            if (!select) return;
+            solicitarCambioEstado(id_pedido, select.value);
+        }
+
+        function abrirModalCancelar(id_pedido, numero_pedido) {
+            idPedidoACancelar = id_pedido;
+            document.getElementById('modalCancelarNumero').textContent = numero_pedido;
+            document.getElementById('inputMotivoCancelacion').value = '';
+            const modal = document.getElementById('modalCancelarPedido');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function cerrarModalCancelar() {
+            const modal = document.getElementById('modalCancelarPedido');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            idPedidoACancelar = null;
+        }
+
+        function confirmarCancelacionPedido() {
+            const motivo = document.getElementById('inputMotivoCancelacion').value;
+            const res = IPedidoServicio.cancelarPedido(idPedidoACancelar, motivo, sesionActual);
+            if (!res.ok) {
+                mostrarNotificacion('Cancelación Rechazada', res.mensaje, 'error');
+                return;
+            }
+            cerrarModalCancelar();
+            mostrarNotificacion('Orden Cancelada', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function alternarEstadoProducto(id_producto) {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acción restringida', permiso.mensaje, 'error');
+                return;
+            }
+            const prod = ICatalogoServicio.obtenerProductoPorId(id_producto);
+            if (!prod) return;
+            prod.activo = !prod.activo;
+            guardarPersistencia();
+            mostrarNotificacion(
+                'Estado del producto actualizado',
+                `"${prod.nombre}" ahora se encuentra ${prod.activo ? 'Activo en el menú' : 'Inactivo (fuera de temporada)'}.`,
+                'info'
+            );
+            refrescarInterfaz();
+        }
+
+        function abrirModalEntradaInventario() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acción restringida', permiso.mensaje, 'error');
+                return;
+            }
+            const select = document.getElementById('selectProductoEntrada');
+            select.innerHTML = ICatalogoServicio.consultarCatalogo(false).map(p =>
+                `<option value="${p.id_producto}">${p.codigo} — ${p.nombre} (Actual: ${p.existencia})</option>`
+            ).join('');
+            const m = document.getElementById('modalEntradaInventario');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function cerrarModalEntradaInventario() {
+            const m = document.getElementById('modalEntradaInventario');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function guardarEntradaInventario() {
+            const idProd = Number(document.getElementById('selectProductoEntrada').value);
+            const cant = Number(document.getElementById('inputCantidadEntrada').value);
+            const motivo = document.getElementById('inputMotivoEntrada').value;
+            const res = ICatalogoServicio.registrarEntradaInventario(idProd, cant, motivo, sesionActual);
+            if (!res.ok) {
+                mostrarNotificacion('Error en entrada de inventario', res.mensaje, 'error');
+                return;
+            }
+            cerrarModalEntradaInventario();
+            mostrarNotificacion('Inventario Actualizado', `Se sumaron ${cant} unidades correctamente.`, 'exito');
+            refrescarInterfaz();
+        }
+
+        function renderizarVistaBodega() {
+            const tbody = document.getElementById('tablaCatalogoCompleta');
+            tbody.innerHTML = ICatalogoServicio.consultarCatalogo(false).map(p => `
+                <tr>
+                    <td class="py-3 px-4 font-mono font-semibold text-xs text-stone-600">#${p.id_producto} • ${p.codigo}</td>
+                    <td class="py-3 px-4 font-medium text-slate-900">${p.nombre}</td>
+                    <td class="py-3 px-4 text-stone-600 text-xs">${p.categoria}</td>
+                    <td class="py-3 px-4 text-right font-mono font-bold">$${p.precio.toLocaleString('es-CO')}</td>
+                    <td class="py-3 px-4 text-center font-mono font-bold text-base ${p.existencia === 0 ? 'text-rose-600' : 'text-slate-900'}">${p.existencia}</td>
+                    <td class="py-3 px-4 text-center">
+                        ${p.existencia <= 5
+                    ? '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Por agotar (&le;5)</span>'
+                    : '<span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700">Abastecido</span>'}
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        ${p.activo
+                    ? '<span class="px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-emerald-100 text-emerald-800">Activo</span>'
+                    : '<span class="px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-stone-200 text-stone-600">Inactivo</span>'}
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <div class="flex items-center justify-center gap-1.5">
+                            <button onclick="abrirModalEditarProducto(${p.id_producto})" class="px-2.5 py-1 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-medium transition" title="Editar precio o existencias">
+                                <i class="fa-solid fa-pen"></i> Editar
+                            </button>
+                            <button onclick="alternarEstadoProducto(${p.id_producto})" class="px-2.5 py-1 rounded-xl border border-stone-300 hover:bg-stone-100 text-xs font-medium transition">
+                                ${p.activo ? 'Suspender' : 'Activar'}
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+
+            const tbodyMov = document.getElementById('tablaMovimientosInventario');
+            tbodyMov.innerHTML = BD.movimientos.map(m => {
+                const prod = ICatalogoServicio.obtenerProductoPorId(m.id_producto);
+                const esPositivo = m.cantidad > 0;
+                return `
+                    <tr>
+                        <td class="py-2.5 px-3 font-mono text-stone-500">#${m.id_movimiento}</td>
+                        <td class="py-2.5 px-3 font-mono text-stone-500">${m.fecha}</td>
+                        <td class="py-2.5 px-3 font-medium text-slate-900">${prod ? prod.nombre : ''}</td>
+                        <td class="py-2.5 px-3 text-center">
+                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${esPositivo ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">${m.tipo}</span>
+                        </td>
+                        <td class="py-2.5 px-3 text-center font-mono font-bold ${esPositivo ? 'text-emerald-600' : 'text-rose-600'}">${esPositivo ? '+' + m.cantidad : m.cantidad}</td>
+                        <td class="py-2.5 px-3 text-stone-600">${m.motivo}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function obtenerDescripcionPermisosRol(rol) {
+            if (rol === 'Cajero') {
+                return 'Permisos: Registrar nuevos pedidos en barra y cancelar órdenes en estado "Registrado".';
+            }
+            if (rol === 'Personal de preparación') {
+                return 'Permisos: Consultar órdenes activas y avanzar estados de cocina (Registrado → En preparación → Listo → Entregado).';
+            }
+            return 'Permisos: Gestión total de usuarios, cambio de contraseñas, catálogo de productos y entradas de almacén.';
+        }
+
+        function renderizarVistaUsuarios() {
+            const tbody = document.getElementById('tablaUsuariosBD');
+            if (!tbody) return;
+            tbody.innerHTML = BD.usuarios.map(u => `
+                <tr>
+                    <td class="py-3 px-4 font-mono text-stone-500">#${u.id_usuario}</td>
+                    <td class="py-3 px-4 font-mono font-bold text-slate-900">${u.username}</td>
+                    <td class="py-3 px-4 font-medium text-slate-800">${u.nombre}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${u.rol === 'Administrador' ? 'bg-indigo-100 text-indigo-800' : u.rol === 'Cajero' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                            ${u.rol}
+                        </span>
+                        <span class="block text-[11px] text-stone-400 mt-0.5">${obtenerDescripcionPermisosRol(u.rol)}</span>
+                    </td>
+                    <td class="py-3 px-4 font-mono text-[11px] text-stone-500">${u.password_hash}</td>
+                    <td class="py-3 px-4 text-center">
+                        ${u.activo
+                    ? '<span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[11px] font-bold">Activo</span>'
+                    : '<span class="px-2 py-0.5 rounded-md bg-rose-100 text-rose-800 text-[11px] font-bold">Inactivo</span>'}
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <div class="flex items-center justify-center gap-1.5">
+                            <button onclick="abrirModalCambiarPassword(${u.id_usuario})" class="px-2.5 py-1 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 text-xs font-semibold transition flex items-center gap-1" title="Cambiar contraseña y actualizar hash en BD">
+                                <i class="fa-solid fa-key"></i>
+                                <span>Cambiar Clave</span>
+                            </button>
+                            <button onclick="alternarEstadoUsuarioBD(${u.id_usuario})" class="px-2.5 py-1 rounded-xl border border-stone-300 hover:bg-stone-100 text-xs font-medium transition">
+                                ${u.activo ? 'Desactivar' : 'Reactivar'}
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function abrirModalCambiarPassword(id_usuario) {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acción restringida', permiso.mensaje, 'error');
+                return;
+            }
+            const user = BD.usuarios.find(u => u.id_usuario === Number(id_usuario));
+            if (!user) return;
+
+            document.getElementById('inputPassUserId').value = user.id_usuario;
+            document.getElementById('labelPassUserNombre').textContent = `${user.nombre} (${user.rol})`;
+            document.getElementById('labelPassUserLogin').textContent = user.username;
+            document.getElementById('inputNuevaPasswordAdmin').value = '';
+            document.getElementById('previewNuevoHash').textContent = 'Ingresa una contraseña para generar el hash...';
+
+            const m = document.getElementById('modalCambiarPassword');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function previsualizarHashNuevaPassword() {
+            const val = document.getElementById('inputNuevaPasswordAdmin').value;
+            const preview = document.getElementById('previewNuevoHash');
+            if (!val) {
+                preview.textContent = 'Ingresa una contraseña para generar el hash...';
+            } else {
+                preview.textContent = generarHashSeguro(val.trim());
+            }
+        }
+
+        function cerrarModalCambiarPassword() {
+            const m = document.getElementById('modalCambiarPassword');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function confirmarCambioPasswordBD() {
+            const idUser = Number(document.getElementById('inputPassUserId').value);
+            const nuevaPass = document.getElementById('inputNuevaPasswordAdmin').value;
+            const res = IUsuarioServicio.cambiarPasswordUsuario(idUser, nuevaPass, sesionActual);
+            if (!res.ok) {
+                mostrarNotificacion('No se pudo actualizar la contraseña', res.mensaje, 'error');
+                return;
+            }
+            cerrarModalCambiarPassword();
+            mostrarNotificacion('Contraseña Actualizada en BD', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function alternarEstadoUsuarioBD(id_usuario) {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acción restringida', permiso.mensaje, 'error');
+                return;
+            }
+            const user = BD.usuarios.find(u => u.id_usuario === Number(id_usuario));
+            if (!user) return;
+            if (sesionActual && user.id_usuario === sesionActual.id_usuario) {
+                mostrarNotificacion('Operación no permitida', 'No puedes desactivar tu propia cuenta mientras tienes el turno abierto.', 'error');
+                return;
+            }
+            user.activo = !user.activo;
+            guardarPersistencia();
+            mostrarNotificacion('Personal actualizado', `La cuenta "${user.username}" ahora está ${user.activo ? 'activa' : 'inactiva'} en la base de datos.`, 'info');
+            refrescarInterfaz();
+        }
+
+        function abrirModalNuevoProducto() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Permiso denegado', permiso.mensaje, 'error');
+                return;
+            }
+            document.getElementById('tituloModalProducto').textContent = 'Registrar Nuevo Producto';
+            document.getElementById('editProdId').value = '';
+            document.getElementById('inputProdCodigo').value = `CAF-00${BD.productos.length + 1}`;
+            document.getElementById('inputProdNombre').value = '';
+            document.getElementById('inputProdDescripcion').value = '';
+            document.getElementById('inputProdPrecio').value = 5000;
+            document.getElementById('inputProdStock').value = 10;
+            const m = document.getElementById('modalNuevoProducto');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function abrirModalEditarProducto(id_producto) {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Permiso denegado', permiso.mensaje, 'error');
+                return;
+            }
+            const p = ICatalogoServicio.obtenerProductoPorId(id_producto);
+            if (!p) return;
+            document.getElementById('tituloModalProducto').textContent = `Editar Producto #${p.id_producto}`;
+            document.getElementById('editProdId').value = p.id_producto;
+            document.getElementById('inputProdCodigo').value = p.codigo;
+            document.getElementById('inputProdCategoria').value = p.categoria;
+            document.getElementById('inputProdNombre').value = p.nombre;
+            document.getElementById('inputProdDescripcion').value = p.descripcion;
+            document.getElementById('inputProdPrecio').value = p.precio;
+            document.getElementById('inputProdStock').value = p.existencia;
+            const m = document.getElementById('modalNuevoProducto');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function cerrarModalNuevoProducto() {
+            const m = document.getElementById('modalNuevoProducto');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function guardarProductoBD() {
+            const idEdit = document.getElementById('editProdId').value;
+            const res = ICatalogoServicio.registrarProducto({
+                id_producto: idEdit ? Number(idEdit) : null,
+                codigo: document.getElementById('inputProdCodigo').value,
+                categoria: document.getElementById('inputProdCategoria').value,
+                nombre: document.getElementById('inputProdNombre').value,
+                descripcion: document.getElementById('inputProdDescripcion').value,
+                precio: document.getElementById('inputProdPrecio').value,
+                existencia: document.getElementById('inputProdStock').value
+            }, sesionActual);
+
+            if (!res.ok) {
+                mostrarNotificacion('Error al guardar producto', res.mensaje, 'error');
+                return;
+            }
+            cerrarModalNuevoProducto();
+            mostrarNotificacion('Catálogo Actualizado', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function actualizarResumenPermisosModal() {
+            const rol = document.getElementById('inputNuevoUserRol').value;
+            const contenedor = document.getElementById('cajaDetallePermisosRol');
+            if (!contenedor) return;
+
+            if (rol === 'Cajero') {
+                contenedor.innerHTML = `
+                    <p class="font-bold text-indigo-950"><i class="fa-solid fa-shield-halved mr-1"></i>Permisos asignados automáticamente al rol Cajero:</p>
+                    <ul class="list-disc list-inside text-[11px] text-indigo-900 space-y-0.5">
+                        <li>Registrar y confirmar nuevos pedidos en caja.</li>
+                        <li>Cancelar pedidos que estén únicamente en estado <strong>Registrado</strong>.</li>
+                        <li>Restricción: No puede alterar estados de cocina ni modificar el catálogo.</li>
+                    </ul>
+                `;
+            } else if (rol === 'Personal de preparación') {
+                contenedor.innerHTML = `
+                    <p class="font-bold text-indigo-950"><i class="fa-solid fa-shield-halved mr-1"></i>Permisos asignados automáticamente al rol Personal de preparación:</p>
+                    <ul class="list-disc list-inside text-[11px] text-indigo-900 space-y-0.5">
+                        <li>Consultar pedidos en curso y avanzar sus estados (Registrado → En preparación → Listo → Entregado).</li>
+                        <li>Restricción: No puede crear ni cancelar pedidos, ni administrar usuarios o inventario.</li>
+                    </ul>
+                `;
+            } else {
+                contenedor.innerHTML = `
+                    <p class="font-bold text-indigo-950"><i class="fa-solid fa-shield-halved mr-1"></i>Permisos asignados automáticamente al rol Administrador:</p>
+                    <ul class="list-disc list-inside text-[11px] text-indigo-900 space-y-0.5">
+                        <li>Crear usuarios, asignar roles, cambiar contraseñas y activar/desactivar cuentas.</li>
+                        <li>Registrar productos, editar precios y registrar entradas de mercancía al inventario.</li>
+                    </ul>
+                `;
+            }
+        }
+
+        function abrirModalNuevoUsuario() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Permiso denegado', permiso.mensaje, 'error');
+                return;
+            }
+            document.getElementById('inputNuevoUserNombre').value = '';
+            document.getElementById('inputNuevoUserLogin').value = '';
+            document.getElementById('inputNuevoUserPass').value = '';
+            document.getElementById('inputNuevoUserRol').value = 'Cajero';
+            actualizarResumenPermisosModal();
+            const m = document.getElementById('modalNuevoUsuario');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function cerrarModalNuevoUsuario() {
+            const m = document.getElementById('modalNuevoUsuario');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function guardarNuevoUsuarioBD() {
+            const res = IUsuarioServicio.gestionarUsuario({
+                nombre: document.getElementById('inputNuevoUserNombre').value,
+                username: document.getElementById('inputNuevoUserLogin').value,
+                password: document.getElementById('inputNuevoUserPass').value,
+                rol: document.getElementById('inputNuevoUserRol').value
+            }, sesionActual);
+
+            if (!res.ok) {
+                mostrarNotificacion('No se pudo crear el usuario', res.mensaje, 'error');
+                return;
+            }
+            cerrarModalNuevoUsuario();
+            mostrarNotificacion('Empleado Registrado', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function renderizarVistaVentas() {
+            const rep = IReporteServicio.consultarVentasPorPeriodo();
+            document.getElementById('reporteTotalVentas').textContent = `$${rep.totalVentas.toLocaleString('es-CO')}`;
+            document.getElementById('reporteConteoEntregados').textContent = `${rep.conteoEntregados} órdenes entregadas en el periodo`;
+            document.getElementById('reporteUnidadesVendidas').textContent = rep.unidadesVendidas;
+            document.getElementById('reporteTotalCancelados').textContent = `$${rep.totalExcluidoCancelados.toLocaleString('es-CO')}`;
+            document.getElementById('reporteConteoCancelados').textContent = `${rep.conteoCancelados} órdenes canceladas excluidas del cierre`;
+
+            const historial = IReporteServicio.consultarHistorialPedidos();
+            const tbody = document.getElementById('tablaHistorialReportes');
+            tbody.innerHTML = historial.map(p => {
+                const usuario = BD.usuarios.find(u => u.id_usuario === p.id_usuario);
+                const dets = BD.detallesPedido.filter(d => d.id_pedido === p.id_pedido);
+                const resumenItems = dets.map(d => {
+                    const pr = ICatalogoServicio.obtenerProductoPorId(d.id_producto);
+                    return `${d.cantidad}x ${pr ? pr.nombre : ''}`;
+                }).join(', ');
+
+                return `
+                    <tr>
+                        <td class="py-3 px-3 font-mono font-bold text-slate-900">${p.numero_pedido}</td>
+                        <td class="py-3 px-3 font-mono text-stone-500">${p.fecha_hora}</td>
+                        <td class="py-3 px-3">${usuario ? usuario.nombre : 'Cajero'}</td>
+                        <td class="py-3 px-3 text-stone-600">${resumenItems}</td>
+                        <td class="py-3 px-3 text-center font-bold">${p.estado}</td>
+                        <td class="py-3 px-3 text-right font-mono font-bold">$${p.total.toLocaleString('es-CO')}</td>
+                        <td class="py-3 px-3 text-stone-500">${p.motivo_cancelacion || (p.estado === 'Entregado' ? 'Venta efectiva' : 'En proceso')}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function abrirModalLogin() {
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            const m = document.getElementById('modalLogin');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function cerrarModalLogin() {
+            const m = document.getElementById('modalLogin');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function actualizarVisibilidadPantallaLogin() {
+            const pantalla = document.getElementById('pantallaLoginCompleta');
+            if (!pantalla) return;
+            if (!sesionActual) {
+                pantalla.classList.remove('hidden');
+                pantalla.classList.add('flex');
+            } else {
+                pantalla.classList.add('hidden');
+                pantalla.classList.remove('flex');
+            }
+        }
+
+        function procesarLoginPantallaCompleta(event) {
+            event.preventDefault();
+            const u = document.getElementById('inputUserLoginScreen').value;
+            const p = document.getElementById('inputPassLoginScreen').value;
+            const errorBox = document.getElementById('mensajeErrorLoginScreen');
+
+            const res = IUsuarioServicio.iniciarSesion(u, p);
+            if (!res.ok) {
+                errorBox.textContent = res.mensaje;
+                errorBox.classList.remove('hidden');
+                return;
+            }
+            errorBox.classList.add('hidden');
+            document.getElementById('inputPassLoginScreen').value = '';
+            actualizarVisibilidadPantallaLogin();
+            mostrarNotificacion('Sesión Autenticada', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        function cerrarSesionActual() {
+            IUsuarioServicio.cerrarSesion();
+            actualizarVisibilidadPantallaLogin();
+            mostrarNotificacion('Turno Cerrado', 'Has cerrado sesión correctamente. Ingresa tus credenciales para abrir un nuevo turno.', 'info');
+        }
+
+        function ejecutarLoginFormulario() {
+            const u = document.getElementById('loginUsername').value;
+            const p = document.getElementById('loginPassword').value;
+            const res = IUsuarioServicio.iniciarSesion(u, p);
+            if (!res.ok) {
+                mostrarNotificacion('Credenciales incorrectas', res.mensaje, 'error');
+                return;
+            }
+            cerrarModalLogin();
+            actualizarVisibilidadPantallaLogin();
+            mostrarNotificacion('Cambio de Turno Exitoso', res.mensaje, 'exito');
+            refrescarInterfaz();
+        }
+
+        // Validación estricta de rol Administrador para respaldar BD (RNF-04, RNF-09, RN-14, RN-15)
+        function descargarRespaldoBD() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acceso Denegado', permiso.mensaje, 'error');
+                return;
+            }
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(BD, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `respaldo_almacafe_bd_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            mostrarNotificacion('Respaldo Generado', 'Se descargó el archivo JSON con todas las tablas de la base de datos.', 'exito');
+        }
+
+        // Solicita confirmación y valida rol Administrador antes de reiniciar la BD
+        function solicitarConfirmacionReinicioBD() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acceso Denegado', permiso.mensaje, 'error');
+                return;
+            }
+            const m = document.getElementById('modalConfirmarReinicioBD');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function cerrarModalConfirmarReinicioBD() {
+            const m = document.getElementById('modalConfirmarReinicioBD');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function ejecutarReinicioConfirmadoBD() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                cerrarModalConfirmarReinicioBD();
+                mostrarNotificacion('Acceso Denegado', permiso.mensaje, 'error');
+                return;
+            }
+            const adminActualId = sesionActual ? sesionActual.id_usuario : 1;
+            try {
+                localStorage.removeItem(CLAVE_STORAGE);
+                window.name = '';
+            } catch (e) { }
+            cargarDatosIniciales(true);
+            sesionActual = BD.usuarios.find(u => u.id_usuario === adminActualId) || BD.usuarios[0];
+            guardarPersistencia();
+            cerrarModalConfirmarReinicioBD();
+            refrescarInterfaz();
+            mostrarNotificacion('Base de datos reiniciada', 'Se restauraron los productos, pedidos y credenciales de fábrica por orden del Administrador.', 'info');
+        }
+
+        function abrirModalVisorSQL() {
+            const permiso = IUsuarioServicio.validarRolAgente(['Administrador'], sesionActual);
+            if (!permiso.autorizado) {
+                mostrarNotificacion('Acceso Denegado', permiso.mensaje, 'error');
+                return;
+            }
+            document.getElementById('contenedorTablaSQLUsuarios').innerHTML = `
+                <table class="w-full text-left border-collapse text-[11px]">
+                    <thead class="bg-stone-100 text-stone-600 font-bold">
+                        <tr>
+                            <th class="p-2.5">id_usuario</th>
+                            <th class="p-2.5">username</th>
+                            <th class="p-2.5">password_hash</th>
+                            <th class="p-2.5">nombre</th>
+                            <th class="p-2.5">rol</th>
+                            <th class="p-2.5">activo</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200 font-mono">
+                        ${BD.usuarios.map(u => `
+                            <tr>
+                                <td class="p-2.5">${u.id_usuario}</td>
+                                <td class="p-2.5 font-bold text-indigo-700">${u.username}</td>
+                                <td class="p-2.5 text-emerald-700">${u.password_hash}</td>
+                                <td class="p-2.5 font-sans">${u.nombre}</td>
+                                <td class="p-2.5 font-sans">${u.rol}</td>
+                                <td class="p-2.5">${u.activo ? 1 : 0}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('contenedorTablaSQLPedidos').innerHTML = `
+                <table class="w-full text-left border-collapse text-[11px]">
+                    <thead class="bg-stone-100 text-stone-600 font-bold">
+                        <tr>
+                            <th class="p-2.5">id_pedido</th>
+                            <th class="p-2.5">numero_pedido</th>
+                            <th class="p-2.5">fecha_hora</th>
+                            <th class="p-2.5">estado</th>
+                            <th class="p-2.5">total</th>
+                            <th class="p-2.5">motivo_cancelacion</th>
+                            <th class="p-2.5">id_usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-200 font-mono">
+                        ${BD.pedidos.map(p => `
+                            <tr>
+                                <td class="p-2.5">${p.id_pedido}</td>
+                                <td class="p-2.5 font-bold">${p.numero_pedido}</td>
+                                <td class="p-2.5">${p.fecha_hora}</td>
+                                <td class="p-2.5 font-sans font-bold">${p.estado}</td>
+                                <td class="p-2.5">${p.total}</td>
+                                <td class="p-2.5 font-sans">${p.motivo_cancelacion || 'NULL'}</td>
+                                <td class="p-2.5">${p.id_usuario}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            const m = document.getElementById('modalVisorSQL');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+
+        function cerrarModalVisorSQL() {
+            const m = document.getElementById('modalVisorSQL');
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+
+        function refrescarInterfaz() {
+            actualizarVisibilidadPantallaLogin();
+            actualizarEncabezadoUsuario();
+            renderizarCatalogoPOS();
+            renderizarCarrito();
+            renderizarListaPedidos();
+            renderizarVistaBodega();
+            renderizarVistaVentas();
+            renderizarVistaUsuarios();
+        }
+
+        window.onload = function () {
+            cargarDatosIniciales(false);
+            refrescarInterfaz();
+            intentarSincronizarConServidorSQLite();
+        };
+    </script>
+</body>
+
+</html>
